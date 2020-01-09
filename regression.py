@@ -1,7 +1,7 @@
-﻿"""
+"""
 Simple Flask application for regression analysis of provided data.
 
-Copy delimited text files CSV into the application root directory.
+Copy delimited text files CSV into the app root directory or subdirectory.
 Files should be formatted with European syntax - a semicolon as the value
 separator and a comma as the decimal separator. First row is headers.
 Value rows should follow order - index;features;outcome (item;X;y).
@@ -16,6 +16,7 @@ __all__ = ['find_csv_files', 'process_data', 'predict_ols']
 __version__ = '0.1.1'
 __author__ = 'Paweł Kowalski'
 
+from glob import glob
 import os
 from threading import Timer
 import webbrowser
@@ -32,10 +33,14 @@ app.config['SECRET_KEY'] = 'SECRET_KEY'
 
 
 def find_csv_files():
-    """Return a list of all CSV files in the application root directory."""
-    dirpath = os.path.dirname(__file__)
-    csv_files = [os.path.join(dirpath, file) for file in os.listdir(dirpath)
-                 if file.endswith('.csv')]
+    """Return a list of all CSV files in the application directories."""
+    try:
+        here = os.path.dirname(__file__)
+    except NameError:
+        here = os.path.abspath('')
+    csv_files = [filename
+                 for dirpath, _, filenames in os.walk(here)
+                 for filename in glob(os.path.join(dirpath, '*.csv'))]
     return csv_files
 
 
