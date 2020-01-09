@@ -2,9 +2,8 @@
 Simple Flask application for regression analysis of provided data.
 
 Copy delimited text files CSV into the app root directory or subdirectory.
-Files should be formatted with European syntax - a semicolon as the value
-separator and a comma as the decimal separator. First row is headers.
-Value rows should follow order - index;features;outcome (item;X;y).
+Reserve the very first row as a header containing a list of field names.
+Value rows should follow order - index,features,outcome (item,X,y).
 Features can be given as numerical or categorical values.
 You can get formatted CSV files by exporting from a spreadsheet.
 Run on Flask's built-in server for simple calculations or deploy to
@@ -16,6 +15,7 @@ __all__ = ['find_csv_files', 'process_data', 'predict_ols']
 __version__ = '0.1.1'
 __author__ = 'Paweł Kowalski'
 
+import csv
 from glob import glob
 import os
 from threading import Timer
@@ -55,8 +55,16 @@ def _is_float(value):
 
 def _get_xy(csv_filepath):
     """Return features and outcomes from CSV file."""
-    filepath = os.path.join(os.path.dirname(__file__), csv_filepath)
-    df = pd.read_csv(filepath, sep=';', header=0, index_col=0, decimal=',')
+    try:
+        here = os.path.dirname(__file__)
+    except NameError:
+        here = os.path.abspath('')
+    filepath = os.path.join(here, csv_filepath)
+    with open(csv_filepath) as csv_file:
+        dialect = csv.Sniffer().sniff(csv_file.read(1024))
+        sep = dialect.delimiter
+    decimal = ',' if sep == ';' else '.'
+    df = pd.read_csv(filepath, sep=sep, header=0, index_col=0, decimal=decimal)
     df.columns = [label.replace(' ', '_') for label in df.columns]
     X = df.iloc[:, :-1]
     y = df.iloc[:, -1]
