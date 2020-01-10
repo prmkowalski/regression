@@ -165,6 +165,8 @@ def result():
             X, y, sample = process_data(file, session['form'])
             prediction, score, predstd = predict_ols(X, y, sample)
             result = f'{prediction:.5g} ± {predstd:.5g} (R^2 = {score:.2f})'
+            if not all(sample.squeeze(axis=0).between(X.min(), X.max())):
+                result += ' (out-of-sample)'
     return render_template('result.html', file=file, form=session['form'],
                            outcome=outcome, result=result)
 
