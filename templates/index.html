@@ -8,12 +8,9 @@
 <body>
     <h1>regression {{ version }}</h1>
     <form method="post" action="/process">
-        <select name="file">
-        {% for file in files %}
-            <option value={{ file }}>{{ file }}</option>
+        {% for name, path in files.items() %}
+            <p><button name="file" value={{ path }}>{{ name }}</button></p>
         {% endfor %}
-        </select>
-        <p><input type="submit"></p>
     </form>
 </body>
 </html>

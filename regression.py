@@ -38,9 +38,9 @@ def find_csv_files():
         here = os.path.dirname(__file__)
     except NameError:
         here = os.path.abspath('')
-    csv_files = [filename
+    csv_files = {''.join(filename.rsplit(here))[1:]: filename
                  for dirpath, _, filenames in os.walk(here)
-                 for filename in glob(os.path.join(dirpath, '*.csv'))]
+                 for filename in glob(os.path.join(dirpath, '*.csv'))}
     return csv_files
 
 

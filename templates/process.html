@@ -8,14 +8,12 @@
 <body>
     <h1>process {{ file }}</h1>
     <form method="post" action="/result">
-        <input type="hidden" name=file value={{ file }}>
+        <input type="hidden" name="file" value={{ file }}>
         {% for feature, values in categorical.items() %}
             <p>{{ feature }}<br>
-            <select name={{ feature }}>
             {% for value in values %}
-                <option value={{ value }}>{{ value }}</option>
+                <input type="radio" name={{ feature }} value={{ value }}>{{ value }}<br>
             {% endfor %}
-            </select></p>
         {% endfor %}
         {% for feature in numerical %}
             <p>{{ feature }}<br>
