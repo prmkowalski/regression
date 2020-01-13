@@ -15,7 +15,7 @@ app.config['SECRET_KEY'] = 'SECRET_KEY'
 
 @app.route('/')
 def index():
-    files = processing.find_csv_files()
+    files = processing.find_files()
     return render_template('index.html', version=__version__, files=files)
 
 

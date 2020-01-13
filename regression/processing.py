@@ -1,4 +1,4 @@
-__all__ = ['find_csv_files', 'process_data', 'predict_ols']
+__all__ = ['find_files', 'get_xy', 'process_data', 'predict_ols']
 
 import csv
 from glob import glob
@@ -9,19 +9,40 @@ import statsmodels.api as sm
 from statsmodels.sandbox.regression.predstd import wls_prediction_std
 
 
-def find_csv_files():
-    """Return a list of all CSV files in the application directories."""
+def find_files(extensions=['csv', 'xls', 'xlsx']):
+    """Return all supported files with paths from app directories."""
     try:
         root = os.path.join(os.path.dirname(__file__), '..')
     except NameError:
         root = os.path.abspath('')
-    csv_files = {''.join(filename.rsplit(root))[1:]: filename
-                 for dirpath, _, filenames in os.walk(root)
-                 for filename in glob(os.path.join(dirpath, '*.csv'))}
-    return csv_files
+    files = {
+        ''.join(filename.rsplit(root))[1:]: filename
+        for dirpath, _, filenames in os.walk(root) for filename in [
+            item for sublist in
+            [glob(os.path.join(dirpath, f'*.{ext}')) for ext in extensions]
+            for item in sublist
+        ]
+    }
+    return files
 
 
-def is_float(value):
+def get_xy(filepath):
+    """Return features and outcomes from the file."""
+    if filepath.split('.')[-1] == 'csv':
+        with open(filepath) as f:
+            dialect = csv.Sniffer().sniff(f.read(1024))
+            sep = dialect.delimiter
+        decimal = ',' if sep == ';' else '.'
+        df = pd.read_csv(filepath, sep=sep, index_col=0, decimal=decimal)
+    if filepath.split('.')[-1] in ['xls', 'xlsx']:
+        df = pd.read_excel(filepath, index_col=0)
+    df.columns = [label.replace(' ', '_') for label in df.columns]
+    X = df.iloc[:, :-1]
+    y = df.iloc[:, -1]
+    return X, y
+
+
+def _is_float(value):
     """Return True if value is a floating point number, False otherwise."""
     try:
         float(value)
@@ -30,32 +51,14 @@ def is_float(value):
         return False
 
 
-def get_xy(csv_filepath):
-    """Return features and outcomes from CSV file."""
-    try:
-        here = os.path.dirname(__file__)
-    except NameError:
-        here = os.path.abspath('')
-    filepath = os.path.join(here, csv_filepath)
-    with open(csv_filepath) as csv_file:
-        dialect = csv.Sniffer().sniff(csv_file.read(1024))
-        sep = dialect.delimiter
-    decimal = ',' if sep == ';' else '.'
-    df = pd.read_csv(filepath, sep=sep, header=0, index_col=0, decimal=decimal)
-    df.columns = [label.replace(' ', '_') for label in df.columns]
-    X = df.iloc[:, :-1]
-    y = df.iloc[:, -1]
-    return X, y
-
-
-def process_data(csv_filepath, sample):
+def process_data(filepath, sample):
     """
     Ingest and format data from the input for regression analysis.
 
     Parameters
     ----------
-    csv_filepath : str
-        Path to a CSV file.
+    filepath : str
+        Path to the file.
     sample : dict of {str: str}
         The {feature: value} pairs for which we want to predict.
 
@@ -69,9 +72,9 @@ def process_data(csv_filepath, sample):
         Data to predict with columns matched to the formatted features (X).
 
     """
-    X, y = get_xy(csv_filepath)
+    X, y = get_xy(filepath)
     sample = {feature: float(value.replace(',', '.', 1))
-              if is_float(value.replace(',', '.', 1)) else value
+              if _is_float(value.replace(',', '.', 1)) else value
               for feature, value in sample.items()}
     X = X.append(pd.Series(sample, name='sample'))
     X = pd.get_dummies(X)
@@ -87,7 +90,7 @@ def predict_ols(X, y, sample):
     Parameters
     ----------
     X, y, sample
-        Data prepared by process_data function.
+        Data prepared by `process_data` function.
 
     Returns
     -------
