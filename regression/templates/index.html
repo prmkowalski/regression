@@ -12,5 +12,9 @@
             <p><button name="file" value={{ path }}>{{ name }}</button></p>
         {% endfor %}
     </form>
+    <form method="post" enctype="multipart/form-data">
+        <p><input type="file" name="file"><br>
+        <input type="submit"></p>
+    </form>
 </body>
 </html>

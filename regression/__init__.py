@@ -3,19 +3,34 @@
 __version__ = '0.1.1'
 __author__ = 'Paweł Kowalski'
 
-from flask import Flask, render_template, request, session
+import os
+
+from flask import Flask, redirect, render_template, request, session
 from pandas.api.types import is_string_dtype, is_numeric_dtype
+from werkzeug.utils import secure_filename
 
 from . import processing
 
 app = Flask(__name__)
 app.config['DEBUG'] = True
 app.config['SECRET_KEY'] = 'SECRET_KEY'
+app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
 
 
-@app.route('/')
+def allowed_file(filename, extensions=['csv', 'xls', 'xlsx']):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in extensions
+
+
+@app.route('/', methods=['GET', 'POST'])
 def index():
     files = processing.find_files()
+    if request.method == 'POST':
+        file = request.files['file']
+        if file and allowed_file(file.filename):
+            os.makedirs(os.path.join(app.instance_path), exist_ok=True)
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(app.instance_path, filename))
+            return redirect(request.url)
     return render_template('index.html', version=__version__, files=files)
 
 

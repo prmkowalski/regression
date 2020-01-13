@@ -28,7 +28,7 @@ def find_files(extensions=['csv', 'xls', 'xlsx']):
 
 def get_xy(filepath):
     """Return features and outcomes from the file."""
-    if filepath.split('.')[-1] == 'csv':
+    if filepath.rsplit('.', 1)[1] == 'csv':
         with open(filepath) as f:
             dialect = csv.Sniffer().sniff(f.read(1024))
             sep = dialect.delimiter
