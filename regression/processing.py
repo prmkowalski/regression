@@ -90,7 +90,7 @@ def predict_ols(X, y, sample):
     Parameters
     ----------
     X, y, sample
-        Data prepared by `process_data` function.
+        Data prepared by ``process_data`` function.
 
     Returns
     -------

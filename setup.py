@@ -7,7 +7,7 @@ from regression import __version__, __doc__, __author__
 with open(os.path.join(os.path.dirname(__file__), 'README.rst')) as f:
     long_description = f.read()
 
-with open('requirements.txt') as f:
+with open(os.path.join(os.path.dirname(__file__), 'requirements.txt')) as f:
     install_requires = [line.strip() for line in f.readlines()]
 
 setup(

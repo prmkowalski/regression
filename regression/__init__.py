@@ -1,8 +1,10 @@
 """Web app and library for regression analysis of provided data files."""
 
+__all__ = ['processing']
 __version__ = '0.2.0'
 __author__ = 'Paweł Kowalski'
 
+from datetime import datetime
 import os
 
 from flask import Flask, redirect, render_template, request, session
@@ -29,7 +31,8 @@ def index():
         if file and allowed_file(file.filename):
             os.makedirs(os.path.join(app.instance_path), exist_ok=True)
             filename = secure_filename(file.filename)
-            file.save(os.path.join(app.instance_path, filename))
+            now = datetime.now().isoformat(sep='_', timespec='seconds')
+            file.save(os.path.join(app.instance_path, now + '_' + filename))
             return redirect(request.url)
     return render_template('index.html', version=__version__, files=files)
 
