@@ -1,6 +1,6 @@
-"""Web application for regression analysis of provided data"""
+"""Web app and library for regression analysis of provided data files."""
 
-__version__ = '0.1.1'
+__version__ = '0.2.0'
 __author__ = 'Paweł Kowalski'
 
 import os

@@ -1,4 +1,4 @@
-"""Run on Flask's built-in server"""
+"""Run on Flask's built-in server."""
 
 from threading import Timer
 import webbrowser
