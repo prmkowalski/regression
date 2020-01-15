@@ -5,8 +5,7 @@ from glob import glob
 import os
 
 import pandas as pd
-import statsmodels.api as sm
-from statsmodels.sandbox.regression.predstd import wls_prediction_std
+from sklearn.linear_model import LinearRegression
 
 
 def find_files(extensions=['csv', 'xls', 'xlsx']):
@@ -98,12 +97,10 @@ def predict_ols(X, y, sample):
         Linear predicted value from a model.
     score : float
         Coefficient of determination R-squared of a prediction model.
-    predstd : float
-        Standard error of prediction with confidence level alpha = 0.05.
 
     """
-    model = sm.OLS(y, X).fit()
+    model = LinearRegression()
+    model.fit(X, y)
     prediction = float(model.predict(sample))
-    score = model.rsquared
-    predstd = wls_prediction_std(model)[0].mean()
-    return prediction, score, predstd
+    score = model.score(X, y)
+    return prediction, score

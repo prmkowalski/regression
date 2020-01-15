@@ -53,9 +53,9 @@ Usage
 
     files = lib.find_files()
     sample = {'feature_1': 'value', 'feature_2': 'value', 'feature_n': 'value'}
-    
+
     X, y, sample = lib.process_data(files['data.csv'], sample)  # Ingest and format data
-    prediction, score, predstd = lib.predict_ols(X, y, sample)  # Run analysis
+    prediction, score = lib.predict_ols(X, y, sample)  # Run analysis
 
 Run web app on Flask's built-in server or deploy to a WSGI server:
 

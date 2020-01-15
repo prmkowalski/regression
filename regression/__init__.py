@@ -29,7 +29,7 @@ def index():
     if request.method == 'POST':
         file = request.files['file']
         if file and allowed_file(file.filename):
-            os.makedirs(os.path.join(app.instance_path), exist_ok=True)
+            os.makedirs(app.instance_path, exist_ok=True)
             filename = secure_filename(file.filename)
             now = datetime.now().isoformat(sep='_', timespec='seconds')
             file.save(os.path.join(app.instance_path, now + '_' + filename))
@@ -65,8 +65,8 @@ def result():
             result = ValueError('Failed to collect data.')
         else:
             X, y, sample = processing.process_data(file, session['form'])
-            prediction, score, predstd = processing.predict_ols(X, y, sample)
-            result = f'{prediction:.5g} ± {predstd:.5g} (R^2 = {score:.2f})'
+            prediction, score = processing.predict_ols(X, y, sample)
+            result = f'{prediction:.5g} (R^2 = {score:.2f})'
             if not all(sample.squeeze(axis=0).between(X.min(), X.max())):
                 result += ' (out-of-sample)'
     return render_template('result.html', file=file, form=session['form'],
