@@ -55,7 +55,8 @@ Usage
     sample = {'feature_1': 'value', 'feature_2': 'value', 'feature_n': 'value'}
 
     X, y, sample = lib.process_data(files['data.csv'], sample)  # Ingest and format data
-    prediction, score = lib.predict_ols(X, y, sample)  # Run analysis
+    lib.predict_ols(X, y, sample)  # Run OLS model
+    lib.predict_gbr(X, y, sample)  # Run Gradient Boosting for regression model
 
 Run web app on Flask's built-in server or deploy to a WSGI server:
 

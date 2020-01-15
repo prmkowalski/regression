@@ -1,4 +1,7 @@
-__all__ = ['find_files', 'get_xy', 'process_data', 'predict_ols']
+__all__ = [
+    'find_files', 'get_xy', 'process_data', 'predict_ols', 'predict_gbr'
+]
+
 
 import csv
 from glob import glob
@@ -26,7 +29,7 @@ def find_files(where=None):
         root = os.path.abspath('')
     top = root if not where else where
     files = {
-        ''.join(filename.rsplit(top))[1:]: filename
+        ''.join(filename.rsplit(top))[1:].replace('\\', '/'): filename
         for dirpath, _, filenames in os.walk(top) for filename in [
             item for sublist in
             [glob(os.path.join(dirpath, f'*.{ext}')) for ext in extensions]

@@ -29,7 +29,7 @@ setup(
         'Topic :: Scientific/Engineering',
         'Topic :: Software Development :: Libraries',
     ],
-    packages=find_packages(),
+    packages=find_packages(exclude=['docs', 'tests']),
     python_requires='>=3.6',
     install_requires=install_requires,
     include_package_data=True,
