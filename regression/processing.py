@@ -6,20 +6,20 @@ import os
 
 import pandas as pd
 from sklearn.linear_model import LinearRegression
+from sklearn.ensemble import GradientBoostingRegressor
 
 
-def find_files(where=None, extensions=['csv', 'xls', 'xlsx']):
+def find_files(where=None):
     """
     Return all supported files with paths.
 
     Parameters
     ----------
-    where: str
+    where: str, optional
         Path to the starting directory.
-    extensions: list of str
-        Supported filename extensions.
 
     """
+    extensions = ['csv', 'xls', 'xlsx']
     try:
         root = os.path.join(os.path.dirname(__file__), '..')
     except NameError:
@@ -115,3 +115,30 @@ def predict_ols(X, y, sample):
     prediction = float(model.predict(sample))
     score = model.score(X, y)
     return prediction, score
+
+
+def predict_gbr(X, y, sample):
+    """
+    Run Gradient Boosting for regression model for data from the input.
+
+    Parameters
+    ----------
+    X, y, sample
+        Data prepared by ``process_data`` function.
+
+    Returns
+    -------
+    predictions : dict of {str: (float, float)}
+        The {'alpha': (prediction, score)} pairs, where:
+        - alpha is the significance level of the quantile loss function,
+        - prediction is the predicted value from a model,
+        - score is the coefficient of determination R^2 of the prediction.
+
+    """
+    alphas = {'lower': .1, 'mid': .5, 'upper': .9}
+    predictions = {}
+    for a in alphas:
+        model = GradientBoostingRegressor(loss='quantile', alpha=alphas[a])
+        model.fit(X, y)
+        predictions[a] = float(model.predict(sample)), model.score(X, y)
+    return predictions
