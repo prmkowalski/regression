@@ -8,15 +8,26 @@ import pandas as pd
 from sklearn.linear_model import LinearRegression
 
 
-def find_files(extensions=['csv', 'xls', 'xlsx']):
-    """Return all supported files with paths from app directories."""
+def find_files(where=None, extensions=['csv', 'xls', 'xlsx']):
+    """
+    Return all supported files with paths.
+
+    Parameters
+    ----------
+    where: str
+        Path to the starting directory.
+    extensions: list of str
+        Supported filename extensions.
+
+    """
     try:
         root = os.path.join(os.path.dirname(__file__), '..')
     except NameError:
         root = os.path.abspath('')
+    top = root if not where else where
     files = {
-        ''.join(filename.rsplit(root))[1:]: filename
-        for dirpath, _, filenames in os.walk(root) for filename in [
+        ''.join(filename.rsplit(top))[1:]: filename
+        for dirpath, _, filenames in os.walk(top) for filename in [
             item for sublist in
             [glob(os.path.join(dirpath, f'*.{ext}')) for ext in extensions]
             for item in sublist
