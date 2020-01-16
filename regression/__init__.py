@@ -30,7 +30,7 @@ def index():
         file = request.files['file']
         if file and allowed_file(file.filename):
             os.makedirs(app.instance_path, exist_ok=True)
-            filename = secure_filename(file.filename)
+            filename = secure_filename(file.filename).replace(' ', '_')
             now = datetime.now().isoformat(sep='_', timespec='seconds')
             file.save(os.path.join(app.instance_path, now + '_' + filename))
             return redirect(request.url)
