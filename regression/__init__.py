@@ -69,5 +69,6 @@ def result():
             result = f'{prediction:.5g} (R^2 = {score:.2f})'
             if not all(sample.squeeze(axis=0).between(X.min(), X.max())):
                 result += ' (out-of-sample)'
-    return render_template('result.html', file=file, form=session['form'],
-                           outcome=outcome, result=result)
+    return render_template('result.html', file=file.rsplit('..', 1)[1],
+                           form=session['form'], outcome=outcome,
+                           result=result)

@@ -6,7 +6,7 @@
     <link href="/static/style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-    <h1>result {{ file }}</h1>
+    <h1>{{ file }}</h1>
     <form action=".">
         {% for feature, value in form.items() %}
             {{ feature }} = {{ value }}<br>

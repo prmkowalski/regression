@@ -6,7 +6,6 @@
     <link href="/static/style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-    <h1>process {{ file }}</h1>
     <form method="post" action="/result">
         <input type="hidden" name="file" value={{ file }}>
         {% for feature, values in categorical.items() %}
