@@ -68,11 +68,13 @@ Run web app on Flask's built-in server or deploy to a WSGI server:
 
     $ python run.py
 
+Files
+-----
+
 Provide your data files either with upload form or by copying them into the app
 root directory or subdirectory in one of the supported file formats:
 
-Delimited text files (CSV)
-^^^^^^^^^^^^^^^^^^^^^^^^^^
+- Delimited text files (CSV)
 
 .. code:: bash
 
@@ -82,8 +84,7 @@ Delimited text files (CSV)
     ...
     item n,Xn1,Xn2,...,Xnp,yn
 
-Excel files (XLS, XLSX)
-^^^^^^^^^^^^^^^^^^^^^^^
+- Excel files (XLS, XLSX)
 
 +--------+-----------------------+---------+
 |  index |        features       | outcome |
