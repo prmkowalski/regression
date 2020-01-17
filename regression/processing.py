@@ -1,4 +1,4 @@
-"""Module with data processing functions."""
+"""Module with a library of data processing functions."""
 
 __all__ = [
     'find_files', 'get_xy', 'process_data', 'predict_ols', 'predict_gbr'
@@ -101,6 +101,8 @@ def process_data(filepath, sample):
 def predict_ols(X, y, sample):
     """
     Run a simple ordinary least squares model for data from the input.
+    
+    https://en.wikipedia.org/wiki/Ordinary_least_squares
 
     Parameters
     ----------
@@ -125,6 +127,8 @@ def predict_ols(X, y, sample):
 def predict_gbr(X, y, sample):
     """
     Run Gradient Boosting for regression model for data from the input.
+    
+    https://en.wikipedia.org/wiki/Gradient_boosting
 
     Parameters
     ----------
@@ -133,11 +137,10 @@ def predict_gbr(X, y, sample):
 
     Returns
     -------
-    predictions : dict of {str: (float, float)}
-        The {'alpha': (prediction, score)} pairs, where alpha is the
-        significance level of the quantile loss function, prediction is the
-        predicted value from a model and score is the coefficient of
-        determination R^2 of the prediction.
+    predictions : dict of {str: float}
+        The {alpha: prediction} pairs, where alpha is the significance
+        level of the quantile loss function and prediction is the predicted
+        value from a model.
 
     """
     alphas = {'lower': .1, 'mid': .5, 'upper': .9}
@@ -145,5 +148,5 @@ def predict_gbr(X, y, sample):
     for a in alphas:
         model = GradientBoostingRegressor(loss='quantile', alpha=alphas[a])
         model.fit(X, y)
-        predictions[a] = float(model.predict(sample)), model.score(X, y)
+        predictions[a] = float(model.predict(sample))
     return predictions

@@ -62,13 +62,18 @@ def result():
         file = session['form'].pop('file', None)
         outcome = processing.get_xy(file)[1].name
         if any([not value for value in session['form'].values()]):
-            result = ValueError('Failed to collect data.')
+            results = {'Error': ValueError('Failed to collect data')}
         else:
             X, y, sample = processing.process_data(file, session['form'])
             prediction, score = processing.predict_ols(X, y, sample)
-            result = f'{prediction:.5g} (R^2 = {score:.2f})'
+            gbr = processing.predict_gbr(X, y, sample)
+            results = {
+                'OLS': f'{prediction:.5g} (R^2 = {score:.2f})',
+                'GBR': f'{gbr["mid"]:.5g} ' +
+                       f'({gbr["lower"]:.5g} ÷ {gbr["upper"]:.5g})',
+            }
             if not all(sample.squeeze(axis=0).between(X.min(), X.max())):
-                result += ' (out-of-sample)'
+                outcome += ' (out-of-sample)'
     return render_template('result.html', file=file.rsplit('..', 1)[1],
                            form=session['form'], outcome=outcome,
-                           result=result)
+                           results=results)

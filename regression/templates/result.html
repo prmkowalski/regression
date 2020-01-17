@@ -13,7 +13,9 @@
         {% endfor %}
         <p>{{ outcome }} =<br>
         <ul style="list-style-type:none;">
-            <li>{{ result }}</li>
+            {% for name, result in results.items() %}
+                <li>{{ name }} >> {{ result }}</li>
+            {% endfor %}
         </ul></p>
         <p><input type="submit"></p>
     </form>

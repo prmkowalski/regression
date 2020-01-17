@@ -24,6 +24,6 @@ def test_regression():
     X, y, sample = lib.process_data(files['tests/data.csv'], sample)
     predictions = [
         lib.predict_ols(X, y, sample)[0],
-        lib.predict_gbr(X, y, sample)['mid'][0],
+        lib.predict_gbr(X, y, sample)['mid'],
     ]
     assert any([np.isclose(actual, p, atol=10) for p in predictions])
