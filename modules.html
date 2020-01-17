@@ -1,0 +1,156 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>regression.processing &#8212; regression 0.2.0 documentation</title>
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">regression 0.2.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-regression.processing">
+<span id="regression-processing"></span><h1>regression.processing<a class="headerlink" href="#module-regression.processing" title="Permalink to this headline">¶</a></h1>
+<p>Module with data processing functions.</p>
+<dl class="function">
+<dt id="regression.processing.find_files">
+<code class="sig-prename descclassname">regression.processing.</code><code class="sig-name descname">find_files</code><span class="sig-paren">(</span><em class="sig-param">where=None</em><span class="sig-paren">)</span><a class="headerlink" href="#regression.processing.find_files" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return all supported files with paths.</p>
+<dl class="simple">
+<dt>where: str, optional</dt><dd><p>Path to the starting directory.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="regression.processing.get_xy">
+<code class="sig-prename descclassname">regression.processing.</code><code class="sig-name descname">get_xy</code><span class="sig-paren">(</span><em class="sig-param">filepath</em><span class="sig-paren">)</span><a class="headerlink" href="#regression.processing.get_xy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return features and outcomes from the file.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="regression.processing.process_data">
+<code class="sig-prename descclassname">regression.processing.</code><code class="sig-name descname">process_data</code><span class="sig-paren">(</span><em class="sig-param">filepath</em>, <em class="sig-param">sample</em><span class="sig-paren">)</span><a class="headerlink" href="#regression.processing.process_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ingest and format data from the input for regression analysis.</p>
+<dl class="simple">
+<dt>filepath<span class="classifier">str</span></dt><dd><p>Path to the file.</p>
+</dd>
+<dt>sample<span class="classifier">dict of {str: str}</span></dt><dd><p>The {feature: value} pairs for which we want to predict.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>X<span class="classifier">DataFrame</span></dt><dd><p>Formatted features with categorical variables converted into dummy.</p>
+</dd>
+<dt>y<span class="classifier">Series</span></dt><dd><p>Outcomes - target values.</p>
+</dd>
+<dt>sample<span class="classifier">DataFrame</span></dt><dd><p>Data to predict with columns matched to the formatted features (X).</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="regression.processing.predict_ols">
+<code class="sig-prename descclassname">regression.processing.</code><code class="sig-name descname">predict_ols</code><span class="sig-paren">(</span><em class="sig-param">X</em>, <em class="sig-param">y</em>, <em class="sig-param">sample</em><span class="sig-paren">)</span><a class="headerlink" href="#regression.processing.predict_ols" title="Permalink to this definition">¶</a></dt>
+<dd><p>Run a simple ordinary least squares model for data from the input.</p>
+<dl class="simple">
+<dt>X, y, sample</dt><dd><p>Data prepared by <code class="docutils literal notranslate"><span class="pre">process_data</span></code> function.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>prediction<span class="classifier">float</span></dt><dd><p>Linear predicted value from a model.</p>
+</dd>
+<dt>score<span class="classifier">float</span></dt><dd><p>Coefficient of determination R-squared of a prediction model.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="regression.processing.predict_gbr">
+<code class="sig-prename descclassname">regression.processing.</code><code class="sig-name descname">predict_gbr</code><span class="sig-paren">(</span><em class="sig-param">X</em>, <em class="sig-param">y</em>, <em class="sig-param">sample</em><span class="sig-paren">)</span><a class="headerlink" href="#regression.processing.predict_gbr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Run Gradient Boosting for regression model for data from the input.</p>
+<dl class="simple">
+<dt>X, y, sample</dt><dd><p>Data prepared by <code class="docutils literal notranslate"><span class="pre">process_data</span></code> function.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>predictions<span class="classifier">dict of {str: (float, float)}</span></dt><dd><p>The {‘alpha’: (prediction, score)} pairs, where alpha is the
+significance level of the quantile loss function, prediction is the
+predicted value from a model and score is the coefficient of
+determination R^2 of the prediction.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/modules.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">regression 0.2.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, Paweł Kowalski.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.3.1.
+    </div>
+  </body>
+</html>
