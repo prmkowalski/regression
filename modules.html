@@ -42,8 +42,12 @@
 <dt id="regression.processing.find_files">
 <code class="sig-prename descclassname">regression.processing.</code><code class="sig-name descname">find_files</code><span class="sig-paren">(</span><em class="sig-param">where=None</em><span class="sig-paren">)</span><a class="headerlink" href="#regression.processing.find_files" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return all supported files with paths.</p>
-<dl class="simple">
-<dt>where: str, optional</dt><dd><p>Path to the starting directory.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>where: str, optional</strong></dt><dd><p>Path to the starting directory.</p>
+</dd>
+</dl>
 </dd>
 </dl>
 </dd></dl>
@@ -58,18 +62,24 @@
 <dt id="regression.processing.process_data">
 <code class="sig-prename descclassname">regression.processing.</code><code class="sig-name descname">process_data</code><span class="sig-paren">(</span><em class="sig-param">filepath</em>, <em class="sig-param">sample</em><span class="sig-paren">)</span><a class="headerlink" href="#regression.processing.process_data" title="Permalink to this definition">¶</a></dt>
 <dd><p>Ingest and format data from the input for regression analysis.</p>
-<dl class="simple">
-<dt>filepath<span class="classifier">str</span></dt><dd><p>Path to the file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>filepath</strong><span class="classifier">str</span></dt><dd><p>Path to the file.</p>
 </dd>
-<dt>sample<span class="classifier">dict of {str: str}</span></dt><dd><p>The {feature: value} pairs for which we want to predict.</p>
+<dt><strong>sample</strong><span class="classifier">dict of {str: str}</span></dt><dd><p>The {feature: value} pairs for which we want to predict.</p>
 </dd>
 </dl>
-<dl class="simple">
-<dt>X<span class="classifier">DataFrame</span></dt><dd><p>Formatted features with categorical variables converted into dummy.</p>
 </dd>
-<dt>y<span class="classifier">Series</span></dt><dd><p>Outcomes - target values.</p>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>X</strong><span class="classifier">DataFrame</span></dt><dd><p>Formatted features with categorical variables converted into dummy.</p>
 </dd>
-<dt>sample<span class="classifier">DataFrame</span></dt><dd><p>Data to predict with columns matched to the formatted features (X).</p>
+<dt><strong>y</strong><span class="classifier">Series</span></dt><dd><p>Outcomes - target values.</p>
+</dd>
+<dt><strong>sample</strong><span class="classifier">DataFrame</span></dt><dd><p>Data to predict with columns matched to the formatted features (X).</p>
+</dd>
+</dl>
 </dd>
 </dl>
 </dd></dl>
@@ -78,14 +88,20 @@
 <dt id="regression.processing.predict_ols">
 <code class="sig-prename descclassname">regression.processing.</code><code class="sig-name descname">predict_ols</code><span class="sig-paren">(</span><em class="sig-param">X</em>, <em class="sig-param">y</em>, <em class="sig-param">sample</em><span class="sig-paren">)</span><a class="headerlink" href="#regression.processing.predict_ols" title="Permalink to this definition">¶</a></dt>
 <dd><p>Run a simple ordinary least squares model for data from the input.</p>
-<dl class="simple">
-<dt>X, y, sample</dt><dd><p>Data prepared by <code class="docutils literal notranslate"><span class="pre">process_data</span></code> function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>X, y, sample</strong></dt><dd><p>Data prepared by <code class="docutils literal notranslate"><span class="pre">process_data</span></code> function.</p>
 </dd>
 </dl>
-<dl class="simple">
-<dt>prediction<span class="classifier">float</span></dt><dd><p>Linear predicted value from a model.</p>
 </dd>
-<dt>score<span class="classifier">float</span></dt><dd><p>Coefficient of determination R-squared of a prediction model.</p>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>prediction</strong><span class="classifier">float</span></dt><dd><p>Linear predicted value from a model.</p>
+</dd>
+<dt><strong>score</strong><span class="classifier">float</span></dt><dd><p>Coefficient of determination R-squared of a prediction model.</p>
+</dd>
+</dl>
 </dd>
 </dl>
 </dd></dl>
@@ -94,15 +110,21 @@
 <dt id="regression.processing.predict_gbr">
 <code class="sig-prename descclassname">regression.processing.</code><code class="sig-name descname">predict_gbr</code><span class="sig-paren">(</span><em class="sig-param">X</em>, <em class="sig-param">y</em>, <em class="sig-param">sample</em><span class="sig-paren">)</span><a class="headerlink" href="#regression.processing.predict_gbr" title="Permalink to this definition">¶</a></dt>
 <dd><p>Run Gradient Boosting for regression model for data from the input.</p>
-<dl class="simple">
-<dt>X, y, sample</dt><dd><p>Data prepared by <code class="docutils literal notranslate"><span class="pre">process_data</span></code> function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>X, y, sample</strong></dt><dd><p>Data prepared by <code class="docutils literal notranslate"><span class="pre">process_data</span></code> function.</p>
 </dd>
 </dl>
-<dl class="simple">
-<dt>predictions<span class="classifier">dict of {str: (float, float)}</span></dt><dd><p>The {‘alpha’: (prediction, score)} pairs, where alpha is the
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>predictions</strong><span class="classifier">dict of {str: (float, float)}</span></dt><dd><p>The {‘alpha’: (prediction, score)} pairs, where alpha is the
 significance level of the quantile loss function, prediction is the
 predicted value from a model and score is the coefficient of
 determination R^2 of the prediction.</p>
+</dd>
+</dl>
 </dd>
 </dl>
 </dd></dl>
