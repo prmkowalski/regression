@@ -37,7 +37,7 @@
             
   <div class="section" id="module-regression.processing">
 <span id="regression-processing"></span><h1>regression.processing<a class="headerlink" href="#module-regression.processing" title="Permalink to this headline">¶</a></h1>
-<p>Module with data processing functions.</p>
+<p>Module with a library of data processing functions.</p>
 <dl class="function">
 <dt id="regression.processing.find_files">
 <code class="sig-prename descclassname">regression.processing.</code><code class="sig-name descname">find_files</code><span class="sig-paren">(</span><em class="sig-param">where=None</em><span class="sig-paren">)</span><a class="headerlink" href="#regression.processing.find_files" title="Permalink to this definition">¶</a></dt>
@@ -88,6 +88,7 @@
 <dt id="regression.processing.predict_ols">
 <code class="sig-prename descclassname">regression.processing.</code><code class="sig-name descname">predict_ols</code><span class="sig-paren">(</span><em class="sig-param">X</em>, <em class="sig-param">y</em>, <em class="sig-param">sample</em><span class="sig-paren">)</span><a class="headerlink" href="#regression.processing.predict_ols" title="Permalink to this definition">¶</a></dt>
 <dd><p>Run a simple ordinary least squares model for data from the input.</p>
+<p><a class="reference external" href="https://en.wikipedia.org/wiki/Ordinary_least_squares">https://en.wikipedia.org/wiki/Ordinary_least_squares</a></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><dl class="simple">
@@ -110,6 +111,7 @@
 <dt id="regression.processing.predict_gbr">
 <code class="sig-prename descclassname">regression.processing.</code><code class="sig-name descname">predict_gbr</code><span class="sig-paren">(</span><em class="sig-param">X</em>, <em class="sig-param">y</em>, <em class="sig-param">sample</em><span class="sig-paren">)</span><a class="headerlink" href="#regression.processing.predict_gbr" title="Permalink to this definition">¶</a></dt>
 <dd><p>Run Gradient Boosting for regression model for data from the input.</p>
+<p><a class="reference external" href="https://en.wikipedia.org/wiki/Gradient_boosting">https://en.wikipedia.org/wiki/Gradient_boosting</a></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><dl class="simple">
@@ -119,10 +121,9 @@
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><dl class="simple">
-<dt><strong>predictions</strong><span class="classifier">dict of {str: (float, float)}</span></dt><dd><p>The {‘alpha’: (prediction, score)} pairs, where alpha is the
-significance level of the quantile loss function, prediction is the
-predicted value from a model and score is the coefficient of
-determination R^2 of the prediction.</p>
+<dt><strong>predictions</strong><span class="classifier">dict of {str: float}</span></dt><dd><p>The {alpha: prediction} pairs, where alpha is the significance
+level of the quantile loss function and prediction is the predicted
+value from a model.</p>
 </dd>
 </dl>
 </dd>
