@@ -1,3 +1,5 @@
+"""Module with data processing functions."""
+
 __all__ = [
     'find_files', 'get_xy', 'process_data', 'predict_ols', 'predict_gbr'
 ]
@@ -132,10 +134,10 @@ def predict_gbr(X, y, sample):
     Returns
     -------
     predictions : dict of {str: (float, float)}
-        The {'alpha': (prediction, score)} pairs, where:
-        - alpha is the significance level of the quantile loss function,
-        - prediction is the predicted value from a model,
-        - score is the coefficient of determination R^2 of the prediction.
+        The {'alpha': (prediction, score)} pairs, where alpha is the
+        significance level of the quantile loss function, prediction is the
+        predicted value from a model and score is the coefficient of
+        determination R^2 of the prediction.
 
     """
     alphas = {'lower': .1, 'mid': .5, 'upper': .9}

@@ -14,7 +14,7 @@ regression
     :alt: PyPI - Status
 
 .. image:: https://img.shields.io/github/license/makr3la/regression
-    :target: LICENSE
+    :target: https://github.com/makr3la/regression/blob/master/LICENSE
     :alt: GitHub
 
 .. image:: https://img.shields.io/travis/makr3la/regression
@@ -42,7 +42,9 @@ For web app use `git <https://git-scm.com/>`_ to clone GitHub repository:
     $ cd regression
     $ pip install -r requirements.txt
 
-Check `<requirements.txt>`_ for dependencies.
+Check
+`requirements.txt <https://github.com/makr3la/regression/blob/master/requirements.txt>`_
+for dependencies.
 
 Usage
 -----
