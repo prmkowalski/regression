@@ -25,6 +25,8 @@ Web app and library for
 `regression analysis <https://en.wikipedia.org/wiki/Regression_analysis>`_
 of provided data files.
 
+`Changelog » <https://github.com/makr3la/regression/releases>`_
+
 Installation
 ------------
 
