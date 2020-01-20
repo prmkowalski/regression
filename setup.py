@@ -1,8 +1,9 @@
 import os
 
 from setuptools import setup, find_packages
+import versioneer
 
-from regression import __version__, __doc__, __author__
+from regression import __doc__, __author__
 
 with open(os.path.join(os.path.dirname(__file__), 'README.rst')) as f:
     long_description = f.read()
@@ -12,7 +13,8 @@ with open(os.path.join(os.path.dirname(__file__), 'requirements.txt')) as f:
 
 setup(
     name='regression',
-    version=__version__,
+    version=versioneer.get_version(),
+    cmdclass=versioneer.get_cmdclass(),
     description=__doc__,
     long_description=long_description,
     url='https://github.com/makr3la/regression',

@@ -1,7 +1,6 @@
 """Web app and library for regression analysis of provided data files."""
 
 __all__ = ['processing']
-__version__ = '0.2.0'
 __author__ = 'Paweł Kowalski'
 
 from datetime import datetime
@@ -12,6 +11,10 @@ from pandas.api.types import is_string_dtype, is_numeric_dtype
 from werkzeug.utils import secure_filename
 
 from . import processing
+from ._version import get_versions
+
+__version__ = get_versions()['version']
+del get_versions
 
 app = Flask(__name__)
 app.config['DEBUG'] = True

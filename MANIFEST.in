@@ -2,3 +2,5 @@ include README.rst
 include LICENSE
 recursive-include regression/static *
 recursive-include regression/templates *
+include versioneer.py
+include regression/_version.py
