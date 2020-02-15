@@ -17,9 +17,7 @@ __version__ = get_versions()['version']
 del get_versions
 
 app = Flask(__name__)
-app.config['DEBUG'] = True
-app.config['SECRET_KEY'] = 'SECRET_KEY'
-app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
+app.config.from_object('config')
 
 
 def allowed_file(filename, extensions=['csv', 'xls', 'xlsx']):
