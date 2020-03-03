@@ -17,9 +17,11 @@ regression
     :target: https://github.com/makr3la/regression/blob/master/LICENSE
     :alt: GitHub
 
-.. image:: https://img.shields.io/travis/makr3la/regression
-    :target: https://travis-ci.com/makr3la/regression
-    :alt: Travis (.org)
+.. image:: https://travis-ci.org/makr3la/regression.svg?branch=master
+    :target: https://travis-ci.org/makr3la/regression
+
+.. image:: https://coveralls.io/repos/github/makr3la/regression/badge.svg
+    :target: https://coveralls.io/github/makr3la/regression
 
 Web app and library for
 `regression analysis <https://en.wikipedia.org/wiki/Regression_analysis>`_
