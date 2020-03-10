@@ -23,6 +23,9 @@ regression
 .. image:: https://coveralls.io/repos/github/makr3la/regression/badge.svg
     :target: https://coveralls.io/github/makr3la/regression
 
+.. |Run on Repl.it| image:: https://repl.it/badge/github/makr3la/regression
+   :target: https://repl.it/github/makr3la/regression
+
 Web app and library for
 `regression analysis <https://en.wikipedia.org/wiki/Regression_analysis>`_
 of provided data files.
