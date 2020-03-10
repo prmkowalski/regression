@@ -5,5 +5,5 @@ import webbrowser
 
 from regression import app
 
-Timer(1, webbrowser.open_new('http://127.0.0.1:5000/')).start()
-app.run(debug=False)
+Timer(1, webbrowser.open_new('http://localhost:8080/')).start()
+app.run(host='0.0.0.0', port=8080, debug=False)
