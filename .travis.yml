@@ -4,10 +4,7 @@ python:
   - "3.7"
   - "3.8"
 install:
-  - pip install pytest
-  - pip install pytest-cov
-  - pip install coveralls
-  - pip install -r requirements.txt
+  - pip install coveralls flask pandas pytest pytest-cov scikit-learn
   - if [[ $TRAVIS_PYTHON_VERSION == '3.7' ]]; then pip install sphinx numpydoc; fi
 script:
   - pytest --cov=regression

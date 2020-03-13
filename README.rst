@@ -23,10 +23,7 @@
 .. image:: https://coveralls.io/repos/github/makr3la/regression/badge.svg
     :target: https://coveralls.io/github/makr3la/regression
 
-.. image:: https://repl.it/badge/github/makr3la/regression
-   :target: https://repl.it/github/makr3la/regression
-
-Web app and library for
+Web app for
 `regression analysis <https://en.wikipedia.org/wiki/Regression_analysis>`_
 of provided data files.
 
@@ -41,37 +38,17 @@ Install with `pip <https://pip.pypa.io/en/stable/>`_:
 
     $ pip install regression
 
-For web app use `git <https://git-scm.com/>`_ to clone GitHub repository:
-
-.. code:: bash
-
-    $ git clone git://github.com/makr3la/regression
-    $ cd regression
-    $ pip install -r requirements.txt
-
-Check
-`requirements.txt <https://github.com/makr3la/regression/blob/master/requirements.txt>`_
-for dependencies.
-
 Usage
 -----
 
-.. code:: python
+.. image:: https://repl.it/badge/github/makr3la/regression
+   :target: https://repl.it/github/makr3la/regression
 
-    from regression import processing as lib
-
-    files = lib.find_files()
-    sample = {'feature_1': 'value', 'feature_2': 'value', 'feature_n': 'value'}
-
-    X, y, sample = lib.process_data(files['data.csv'], sample)  # Ingest and format data
-    lib.predict_ols(X, y, sample)  # Run OLS model
-    lib.predict_gbr(X, y, sample)  # Run Gradient Boosting for regression model
-
-Run web app on Flask's built-in server or deploy to a WSGI server:
+Deploy web app to a WSGI server or run locally on Flask's built-in server:
 
 .. code:: bash
 
-    $ python run.py
+    $ python -m regression
 
 Files
 -----

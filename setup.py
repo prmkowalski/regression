@@ -10,9 +10,6 @@ here = path.abspath(path.dirname(__file__))
 with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
     long_description = f.read()
 
-with open(path.join(here, 'requirements.txt'), encoding='utf-8') as f:
-    install_requires = [line.strip() for line in f.readlines()]
-
 setup(
     name='regression',
     version=versioneer.get_version(),
@@ -34,11 +31,14 @@ setup(
         'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: 3.8',
         'Topic :: Scientific/Engineering',
-        'Topic :: Software Development :: Libraries',
     ],
     packages=find_packages(exclude=['docs', 'tests']),
     python_requires='>=3.6',
-    install_requires=install_requires,
+    install_requires=[
+        'flask',
+        'pandas',
+        'scikit-learn',
+    ],
     include_package_data=True,
     zip_safe=False,
 )
