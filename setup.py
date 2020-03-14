@@ -38,6 +38,7 @@ setup(
         'flask',
         'pandas',
         'scikit-learn',
+        'xlrd>=1.1,<2',
     ],
     include_package_data=True,
     zip_safe=False,
