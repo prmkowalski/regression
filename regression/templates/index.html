@@ -2,16 +2,17 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>regression</title>
+    <title>regression {{ version }}</title>
     <link href="/static/style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-    <h1><a href="https://makr3la.github.io/regression/">regression {{ version }}</a></h1>
     <form method="post" action="/process">
         {% for name, path in files.items() %}
-            <p><button name="file" value={{ path }}>{{ name }}</button></p>
+            <p><button name="file" value={{ path }}>{{ loop.index }}</button>
+            {{ name|safe }}</p>
         {% endfor %}
     </form>
+    <a href="https://makr3la.github.io/regression/">&#128366 documentation</a>
     <form method="post" enctype="multipart/form-data">
         <p><input type="file" name="file"><br>
         <input type="submit"></p>

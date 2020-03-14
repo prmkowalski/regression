@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>regression</title>
+    <title>regression {{ version }}</title>
     <link href="/static/style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
@@ -11,7 +11,8 @@
         {% for feature, values in categorical.items() %}
             <p>{{ feature }}<br>
             {% for value in values %}
-                <input type="radio" name={{ feature }} value={{ value }}>{{ value }}<br>
+                <input type="radio" name={{ feature }} value={{ value }}>
+                {{ value }}<br>
             {% endfor %}
         {% endfor %}
         {% for feature in numerical %}

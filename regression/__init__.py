@@ -1,9 +1,8 @@
-"""Web app and library for regression analysis of provided data files."""
+"""Web app for regression analysis of provided data files."""
 
 __all__ = ['processing']
 __author__ = 'Paweł Kowalski'
 
-from datetime import datetime
 import os
 
 from flask import Flask, redirect, render_template, request, session
@@ -17,7 +16,7 @@ __version__ = get_versions()['version']
 del get_versions
 
 app = Flask(__name__)
-app.config.from_object('config')
+app.config.from_pyfile('config.cfg')
 
 
 def allowed_file(filename, extensions=['csv', 'xls', 'xlsx']):
@@ -27,13 +26,12 @@ def allowed_file(filename, extensions=['csv', 'xls', 'xlsx']):
 @app.route('/', methods=['GET', 'POST'])
 def index():
     files = processing.find_files()
+    if 'URL' in app.config: files.update(app.config['URL'])
     if request.method == 'POST':
         file = request.files['file']
         if file and allowed_file(file.filename):
-            os.makedirs(app.instance_path, exist_ok=True)
             filename = secure_filename(file.filename).replace(' ', '_')
-            now = datetime.now().isoformat(sep='_', timespec='seconds')
-            file.save(os.path.join(app.instance_path, now + '_' + filename))
+            file.save(os.path.join(os.path.dirname(__file__), '..', filename))
             return redirect(request.url)
     return render_template('index.html', version=__version__, files=files)
 
@@ -52,7 +50,8 @@ def process():
             elif is_numeric_dtype(features[f]):
                 numerical.append(f)
     return render_template('process.html', file=session['file'],
-                           categorical=categorical, numerical=numerical)
+                           categorical=categorical, numerical=numerical,
+                           version=__version__)
 
 
 @app.route('/result', methods=['GET', 'POST'])
@@ -66,15 +65,17 @@ def result():
             results = {'Error': ValueError('Failed to collect data')}
         else:
             X, y, sample = processing.process_data(file, session['form'])
-            prediction, score = processing.predict_ols(X, y, sample)
+            ols, score = processing.predict_ols(X, y, sample)
             gbr = processing.predict_gbr(X, y, sample)
+            ols_url = '"https://en.wikipedia.org/wiki/Ordinary_least_squares"'
+            gbr_url = '"https://en.wikipedia.org/wiki/Gradient_boosting"'
             results = {
-                'OLS': f'{prediction:.5g} (R^2 = {score:.2f})',
-                'GBR': f'{gbr["mid"]:.5g} ' +
-                       f'({gbr["lower"]:.5g} ÷ {gbr["upper"]:.5g})',
+                f'<a href={ols_url}>OLS</a>': f'{ols:.5g} (R² = {score:.2f})',
+                f'<a href={gbr_url}>GBR</a>': f'{gbr["mid"]:.5g} ' +
+                f'({gbr["lower"]:.5g} ÷ {gbr["upper"]:.5g})',
             }
             if not all(sample.squeeze(axis=0).between(X.min(), X.max())):
                 outcome += ' (out-of-sample)'
-    return render_template('result.html', file=file.rsplit('..', 1)[1],
-                           form=session['form'], outcome=outcome,
-                           results=results)
+    return render_template('result.html', form=session['form'],
+                           outcome=outcome, results=results,
+                           version=__version__)

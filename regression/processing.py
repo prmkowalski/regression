@@ -43,13 +43,13 @@ def find_files(where=None):
 
 def get_xy(filepath):
     """Return features and outcomes from the file."""
-    if filepath.rsplit('.', 1)[1] == 'csv':
+    try:
         with open(filepath) as f:
             dialect = csv.Sniffer().sniff(f.read(1024))
             sep = dialect.delimiter
         decimal = ',' if sep == ';' else '.'
         df = pd.read_csv(filepath, sep=sep, index_col=0, decimal=decimal)
-    if filepath.split('.')[-1] in ['xls', 'xlsx']:
+    except:
         df = pd.read_excel(filepath, index_col=0)
     df.columns = [label.replace(' ', '_') for label in df.columns]
     X = df.iloc[:, :-1]
