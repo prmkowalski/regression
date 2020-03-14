@@ -53,8 +53,21 @@ Deploy web app to a WSGI server or run locally on Flask's built-in server:
 Files
 -----
 
-Provide your data files either with upload form or by copying them into the app
-root directory or subdirectory in one of the supported file formats:
+1. Provide your data files in one of the following ways:
+
+- using **upload form**, which will save the file in the app root directory,
+
+- by **copying them** into into the app subdirectory, for example *./data*,
+
+- by **adding links** to files stored online as `URL` dict of config file:
+
+.. code:: bash
+
+    $ python -m regression --config       # Open configuration file
+    ...
+    URL = {'file_name': 'download_link'}  # The file_name can be in HTML format
+
+2. Supported file formats and extensions:
 
 - Delimited text files (CSV)
 
