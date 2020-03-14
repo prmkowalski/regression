@@ -4,7 +4,6 @@ __all__ = [
     'find_files', 'get_xy', 'process_data', 'predict_ols', 'predict_gbr'
 ]
 
-
 import csv
 from glob import glob
 import os
@@ -101,7 +100,7 @@ def process_data(filepath, sample):
 def predict_ols(X, y, sample):
     """
     Run a simple ordinary least squares model for data from the input.
-    
+
     https://en.wikipedia.org/wiki/Ordinary_least_squares
 
     Parameters
@@ -127,7 +126,7 @@ def predict_ols(X, y, sample):
 def predict_gbr(X, y, sample):
     """
     Run Gradient Boosting for regression model for data from the input.
-    
+
     https://en.wikipedia.org/wiki/Gradient_boosting
 
     Parameters

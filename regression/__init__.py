@@ -19,7 +19,8 @@ app = Flask(__name__)
 app.config.from_pyfile('config.cfg')
 
 
-def allowed_file(filename, extensions=['csv', 'xls', 'xlsx']):
+def allowed_file(filename):
+    extensions = ['csv', 'xls', 'xlsx']
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in extensions
 
 
