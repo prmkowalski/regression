@@ -19,7 +19,8 @@
             <p>{{ feature }}<br>
             <input type="number" step="any" name={{ feature }}></p>
         {% endfor %}
-        <p><input type="submit"></p>
+        <p><input type="button" value="«" onclick="history.back()">
+        <input type="submit" value="»"></p>
     </form>
 </body>
 </html>
