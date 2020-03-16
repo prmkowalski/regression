@@ -76,8 +76,7 @@ def result():
                 f'({gbr["lower"]:.5g} ÷ {gbr["upper"]:.5g})',
             }
             if not all(sample.squeeze(axis=0).between(X.min(), X.max())):
-                results = {model: f'{result} (out-of-sample)'
-                           for model, result in results.items()}
+                results['Warning'] = 'Out-of-sample prediction'
     return render_template('result.html', form=session['form'],
                            outcome=outcome, results=results,
                            version=__version__)

@@ -1,12 +1,15 @@
+[tool]
 [tool.poetry]
+authors = ["Paweł Kowalski <makr3la@gmail.com>"]
+description = ""
 name = "regression"
 version = "0.0.0"
-description = ""
-authors = ["Paweł Kowalski <makr3la@gmail.com>"]
-
 [tool.poetry.dependencies]
-python = "^3.6"
+cx-freeze = "*"
 flask = "*"
 pandas = "*"
+py2exe = "*"
+python = "^3.7"
 scikit-learn = "*"
+werkzeug = "^0.15"
 xlrd = "^1.1"
