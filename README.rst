@@ -41,14 +41,22 @@ Install with `pip <https://pip.pypa.io/en/stable/>`_:
 Usage
 -----
 
-.. image:: https://repl.it/badge/github/makr3la/regression
-   :target: https://repl.it/github/makr3la/regression
+To change configuration
+`values <https://flask.palletsprojects.com/en/1.1.x/config/#builtin-configuration-values>`_
+run:
+
+.. code:: bash
+
+    $ python -m regression --config  # Open config.cfg file
 
 Deploy web app to a WSGI server or run locally on Flask's built-in server:
 
 .. code:: bash
 
     $ python -m regression
+
+.. image:: https://repl.it/badge/github/makr3la/regression
+   :target: https://repl.it/github/makr3la/regression
 
 Files
 -----
@@ -63,7 +71,7 @@ Files
 
 .. code:: bash
 
-    $ python -m regression --config       # Open configuration file
+    $ python -m regression --config
     ...
     URL = {'file_name': 'download_link'}  # The file_name can be in HTML format
 
