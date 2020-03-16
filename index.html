@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>regression &#8212; regression 0.3.1.post1 documentation</title>
+    <title>regression &#8212; regression 0.3.1.post2 documentation</title>
     <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     
@@ -26,7 +26,7 @@
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="#">regression 0.3.1.post1 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="#">regression 0.3.1.post2 documentation</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -56,11 +56,17 @@ of provided data files.</p>
 </div>
 <div class="section" id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
-<a class="reference external image-reference" href="https://repl.it/github/makr3la/regression"><img alt="https://repl.it/badge/github/makr3la/regression" src="https://repl.it/badge/github/makr3la/regression" /></a>
+<p>To change configuration
+<a class="reference external" href="https://flask.palletsprojects.com/en/1.1.x/config/#builtin-configuration-values">values</a>
+run:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ python -m regression --config  <span class="c1"># Open config.cfg file</span>
+</pre></div>
+</div>
 <p>Deploy web app to a WSGI server or run locally on Flask’s built-in server:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ python -m regression
 </pre></div>
 </div>
+<a class="reference external image-reference" href="https://repl.it/github/makr3la/regression"><img alt="https://repl.it/badge/github/makr3la/regression" src="https://repl.it/badge/github/makr3la/regression" /></a>
 </div>
 <div class="section" id="files">
 <h2>Files<a class="headerlink" href="#files" title="Permalink to this headline">¶</a></h2>
@@ -72,7 +78,7 @@ of provided data files.</p>
 <li><p>by <strong>copying them</strong> into into the app subdirectory, for example <em>./data</em>,</p></li>
 <li><p>by <strong>adding links</strong> to files stored online as <cite>URL</cite> dict of config file:</p></li>
 </ul>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ python -m regression --config       <span class="c1"># Open configuration file</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ python -m regression --config
 ...
 <span class="nv">URL</span> <span class="o">=</span> <span class="o">{</span><span class="s1">&#39;file_name&#39;</span>: <span class="s1">&#39;download_link&#39;</span><span class="o">}</span>  <span class="c1"># The file_name can be in HTML format</span>
 </pre></div>
@@ -206,7 +212,7 @@ discuss what you would like to change.</p>
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="#">regression 0.3.1.post1 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="#">regression 0.3.1.post2 documentation</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
