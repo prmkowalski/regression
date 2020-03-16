@@ -25,7 +25,7 @@ def find_files(where=None):
     """
     extensions = ['csv', 'xls', 'xlsx']
     try:
-        root = os.path.join(os.path.dirname(__file__), '..')
+        root = os.path.dirname(__file__)
     except NameError:
         root = os.path.abspath('')
     top = root if not where else where

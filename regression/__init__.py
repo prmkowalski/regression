@@ -32,7 +32,7 @@ def index():
         file = request.files['file']
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename).replace(' ', '_')
-            file.save(os.path.join(os.path.dirname(__file__), '..', filename))
+            file.save(os.path.join(os.path.dirname(__file__), filename))
             return redirect(request.url)
     return render_template('index.html', version=__version__, files=files)
 
