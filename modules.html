@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>regression.processing &#8212; regression 0.3.1.post3 documentation</title>
+    <title>regression.processing &#8212; regression 0.3.1.post4 documentation</title>
     <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     
@@ -26,7 +26,7 @@
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">regression 0.3.1.post3 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">regression 0.3.1.post4 documentation</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -86,7 +86,7 @@
 
 <dl class="function">
 <dt id="regression.processing.predict_ols">
-<code class="sig-prename descclassname">regression.processing.</code><code class="sig-name descname">predict_ols</code><span class="sig-paren">(</span><em class="sig-param">X</em>, <em class="sig-param">y</em>, <em class="sig-param">sample</em><span class="sig-paren">)</span><a class="headerlink" href="#regression.processing.predict_ols" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">regression.processing.</code><code class="sig-name descname">predict_ols</code><span class="sig-paren">(</span><em class="sig-param">X</em>, <em class="sig-param">y</em>, <em class="sig-param">sample</em>, <em class="sig-param">dof</em><span class="sig-paren">)</span><a class="headerlink" href="#regression.processing.predict_ols" title="Permalink to this definition">¶</a></dt>
 <dd><p>Run a simple ordinary least squares model for data from the input.</p>
 <p><a class="reference external" href="https://en.wikipedia.org/wiki/Ordinary_least_squares">https://en.wikipedia.org/wiki/Ordinary_least_squares</a></p>
 <dl class="field-list simple">
@@ -94,36 +94,14 @@
 <dd class="field-odd"><dl class="simple">
 <dt><strong>X, y, sample</strong></dt><dd><p>Data prepared by <code class="docutils literal notranslate"><span class="pre">process_data</span></code> function.</p>
 </dd>
-</dl>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><dl class="simple">
-<dt><strong>prediction</strong><span class="classifier">float</span></dt><dd><p>Linear predicted value from a model.</p>
-</dd>
-<dt><strong>score</strong><span class="classifier">float</span></dt><dd><p>Coefficient of determination R-squared of a prediction model.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="function">
-<dt id="regression.processing.predict_gbr">
-<code class="sig-prename descclassname">regression.processing.</code><code class="sig-name descname">predict_gbr</code><span class="sig-paren">(</span><em class="sig-param">X</em>, <em class="sig-param">y</em>, <em class="sig-param">sample</em><span class="sig-paren">)</span><a class="headerlink" href="#regression.processing.predict_gbr" title="Permalink to this definition">¶</a></dt>
-<dd><p>Run Gradient Boosting for regression model for data from the input.</p>
-<p><a class="reference external" href="https://en.wikipedia.org/wiki/Gradient_boosting">https://en.wikipedia.org/wiki/Gradient_boosting</a></p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>X, y, sample</strong></dt><dd><p>Data prepared by <code class="docutils literal notranslate"><span class="pre">process_data</span></code> function.</p>
+<dt><strong>dof</strong><span class="classifier">int</span></dt><dd><p>The t-distribution degrees of freedom (observations - 1).</p>
 </dd>
 </dl>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><dl class="simple">
-<dt><strong>predictions</strong><span class="classifier">dict of {str: float}</span></dt><dd><p>The {alpha: prediction} pairs, where alpha is the significance
-level of the quantile loss function and prediction is the predicted
-value from a model.</p>
+<dt><strong>prediction_results</strong><span class="classifier">Series</span></dt><dd><p>Contains prediction and prediction variance and confidence intervals
+for the prediction of the mean and of new observations.</p>
 </dd>
 </dl>
 </dd>
@@ -168,7 +146,7 @@ value from a model.</p>
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">regression 0.3.1.post3 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">regression 0.3.1.post4 documentation</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
