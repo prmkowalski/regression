@@ -1,16 +1,13 @@
 """Module with a library of data processing functions."""
 
-__all__ = [
-    'find_files', 'get_xy', 'process_data', 'predict_ols', 'predict_gbr'
-]
+__all__ = ['find_files', 'get_xy', 'process_data', 'predict_ols']
 
 import csv
 from glob import glob
 import os
 
 import pandas as pd
-from sklearn.linear_model import LinearRegression
-from sklearn.ensemble import GradientBoostingRegressor
+import statsmodels.api as sm
 
 
 def find_files(where=None):
@@ -51,6 +48,7 @@ def get_xy(filepath):
     except:
         df = pd.read_excel(filepath, index_col=0)
     df.columns = [label.replace(' ', '_') for label in df.columns]
+    df.replace(' ', '_', regex=True, inplace=True)
     X = df.iloc[:, :-1]
     y = df.iloc[:, -1]
     return X, y
@@ -97,7 +95,7 @@ def process_data(filepath, sample):
     return X, y, sample
 
 
-def predict_ols(X, y, sample):
+def predict_ols(X, y, sample, dof):
     """
     Run a simple ordinary least squares model for data from the input.
 
@@ -107,45 +105,19 @@ def predict_ols(X, y, sample):
     ----------
     X, y, sample
         Data prepared by ``process_data`` function.
+    dof : int
+        The t-distribution degrees of freedom (observations - 1).
 
     Returns
     -------
-    prediction : float
-        Linear predicted value from a model.
-    score : float
-        Coefficient of determination R-squared of a prediction model.
+    prediction_results : Series
+        Contains prediction and prediction variance and confidence intervals
+        for the prediction of the mean and of new observations.
 
     """
-    model = LinearRegression()
-    model.fit(X, y)
-    prediction = float(model.predict(sample))
-    score = model.score(X, y)
-    return prediction, score
-
-
-def predict_gbr(X, y, sample):
-    """
-    Run Gradient Boosting for regression model for data from the input.
-
-    https://en.wikipedia.org/wiki/Gradient_boosting
-
-    Parameters
-    ----------
-    X, y, sample
-        Data prepared by ``process_data`` function.
-
-    Returns
-    -------
-    predictions : dict of {str: float}
-        The {alpha: prediction} pairs, where alpha is the significance
-        level of the quantile loss function and prediction is the predicted
-        value from a model.
-
-    """
-    alphas = {'lower': .1, 'mid': .5, 'upper': .9}
-    predictions = {}
-    for a in alphas:
-        model = GradientBoostingRegressor(loss='quantile', alpha=alphas[a])
-        model.fit(X, y)
-        predictions[a] = float(model.predict(sample))
-    return predictions
+    model = sm.OLS(y, X)
+    results = model.fit()
+    prediction = results.get_prediction(sample)
+    prediction.dist_args = [dof]
+    prediction_results = prediction.summary_frame().squeeze()
+    return prediction_results

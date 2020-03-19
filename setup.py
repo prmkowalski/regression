@@ -37,7 +37,7 @@ setup(
     install_requires=[
         'flask',
         'pandas',
-        'scikit-learn',
+        'statsmodels',
         'xlrd>=1.1,<2',
     ],
     include_package_data=True,

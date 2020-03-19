@@ -43,6 +43,7 @@ def process():
         session['file'] = request.form['file']
         session.modified = True
         features = processing.get_xy(session['file'])[0]
+        global categorical
         categorical = {}
         numerical = []
         for f in features:
@@ -61,22 +62,30 @@ def result():
         session['form'] = dict(request.form.items())
         session.modified = True
         file = session['form'].pop('file', None)
-        outcome = processing.get_xy(file)[1].name
+        features, outcome = processing.get_xy(file)
+        category = ('').join(
+            [v for k, v in session['form'].items() if k in categorical])
+        cf = features[categorical].sum(axis=1)
+        n = cf.value_counts().get(category, 1) if category else len(features)
         if any([not value for value in session['form'].values()]):
-            results = {'Error': ValueError('Failed to collect data')}
+            results = {'<font color="red">Error': 'Failed to collect data'}
         else:
             X, y, sample = processing.process_data(file, session['form'])
-            ols, score = processing.predict_ols(X, y, sample)
-            gbr = processing.predict_gbr(X, y, sample)
+            ols = processing.predict_ols(X, y, sample, n - 1)
             ols_url = '"https://en.wikipedia.org/wiki/Ordinary_least_squares"'
-            gbr_url = '"https://en.wikipedia.org/wiki/Gradient_boosting"'
+            se_url = '"https://en.wikipedia.org/wiki/Standard_error"'
+            ci_url = '"https://en.wikipedia.org/wiki/Confidence_interval"'
             results = {
-                f'<a href={ols_url}>OLS</a>': f'{ols:.5g} (R² = {score:.2f})',
-                f'<a href={gbr_url}>GBR</a>': f'{gbr["mid"]:.5g} ' +
-                f'({gbr["lower"]:.5g} ÷ {gbr["upper"]:.5g})',
+                f'<strong><a href={ols_url}>OLS</a> Prediction':
+                    f'{ols["mean"]:.5g}',
+                f'</strong><a href={se_url}>Standard Error</a>':
+                    f'±{ols["mean_se"]:.5g}',
+                f'95% <a href={ci_url}>Confidence Interval</a>':
+                    f'{ols["mean_ci_lower"]:.5g} ÷ {ols["mean_ci_upper"]:.5g}'
             }
+            if category: X = X.loc[(cf[cf == category]).index]
             if not all(sample.squeeze(axis=0).between(X.min(), X.max())):
-                results['Warning'] = 'Out-of-sample prediction'
+                results['<font color="orange">Warning'] = 'Out-of-sample'
     return render_template('result.html', form=session['form'],
-                           outcome=outcome, results=results,
+                           outcome=outcome.name, results=results,
                            version=__version__)
