@@ -71,19 +71,21 @@ def result():
             results = {'<font color="red">Error': 'Failed to collect data'}
         else:
             X, y, sample = processing.process_data(file, session['form'])
+            if category:
+                X = X.loc[(cf[cf == category]).index]
+                y = y.loc[(cf[cf == category]).index]
             ols = processing.predict_ols(X, y, sample, n - 1)
-            ols_url = '"https://en.wikipedia.org/wiki/Ordinary_least_squares"'
-            se_url = '"https://en.wikipedia.org/wiki/Standard_error"'
-            ci_url = '"https://en.wikipedia.org/wiki/Confidence_interval"'
+            ols_url = 'https://en.wikipedia.org/wiki/Ordinary_least_squares'
+            ci_url = 'https://en.wikipedia.org/wiki/Confidence_interval'
+            r2_url = 'https://en.wikipedia.org/wiki/Coefficient_of_determination'
             results = {
                 f'<strong><a href={ols_url}>OLS</a> Prediction':
                     f'{ols["mean"]:.5g}',
-                f'</strong><a href={se_url}>Standard Error</a>':
-                    f'±{ols["mean_se"]:.5g}',
-                f'95% <a href={ci_url}>Confidence Interval</a>':
-                    f'{ols["mean_ci_lower"]:.5g} ÷ {ols["mean_ci_upper"]:.5g}'
+                f'</strong>95% <a href={ci_url}>CI</a>':
+                    f'{ols["mean_ci_lower"]:.5g} ÷ {ols["mean_ci_upper"]:.5g}',
+                f'Adjusted <a href={r2_url}>R²</a>':
+                    f'{ols["rsquared_adj"]:.2f}'
             }
-            if category: X = X.loc[(cf[cf == category]).index]
             if not all(sample.squeeze(axis=0).between(X.min(), X.max())):
                 results['<font color="orange">Warning'] = 'Out-of-sample'
     return render_template('result.html', form=session['form'],
