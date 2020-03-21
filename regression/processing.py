@@ -4,6 +4,7 @@ __all__ = ['find_files', 'get_xy', 'process_data', 'predict_ols']
 
 import csv
 from glob import glob
+import itertools
 import os
 
 import pandas as pd
@@ -21,19 +22,12 @@ def find_files(where=None):
 
     """
     extensions = ['csv', 'xls', 'xlsx']
-    try:
-        root = os.path.dirname(__file__)
-    except NameError:
-        root = os.path.abspath('')
-    top = root if not where else where
-    files = {
-        ''.join(filename.rsplit(top))[1:].replace('\\', '/'): filename
-        for dirpath, _, filenames in os.walk(top) for filename in [
-            item for sublist in
-            [glob(os.path.join(dirpath, f'*.{ext}')) for ext in extensions]
-            for item in sublist
-        ]
-    }
+    top = os.path.dirname(__file__) if not where else where
+    files = {}
+    for dirpath, _, _ in os.walk(top):
+        paths = [glob(os.path.join(dirpath, f'*.{ext}')) for ext in extensions]
+        for path in itertools.chain.from_iterable(paths):
+            files[''.join(path.rsplit(top))[1:].replace('\\', '/')] = path
     return files
 
 

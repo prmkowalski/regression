@@ -36,9 +36,10 @@ setup(
     python_requires='>=3.6',
     install_requires=[
         'flask',
+        'openpyxl>=2.5.7',
         'pandas',
         'statsmodels',
-        'xlrd>=1.1,<2',
+        'xlrd>=1.1',
     ],
     include_package_data=True,
     zip_safe=False,

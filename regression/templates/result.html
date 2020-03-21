@@ -6,7 +6,8 @@
     <link href="/static/style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-    <form action=".">
+    <form method="post" action="/process" style='display: inline;'>
+        <input type="hidden" name="file" value={{ file }}>
         {% for feature, value in form.items() %}
             {{ feature }} = {{ value }}<br>
         {% endfor %}
@@ -16,7 +17,8 @@
                 <li>{{ name|safe }} » {{ result }}</li>
             {% endfor %}
         </ul></p>
-        <p><input type="submit" value="«"></p>
+        <input type="submit" value="«">
+        <input type="button" value="««" onclick="window.location='.';">
     </form>
 </body>
 </html>

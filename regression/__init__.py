@@ -43,14 +43,9 @@ def process():
         session['file'] = request.form['file']
         session.modified = True
         features = processing.get_xy(session['file'])[0]
-        global categorical
-        categorical = {}
-        numerical = []
-        for f in features:
-            if is_string_dtype(features[f]):
-                categorical[f] = features[f].unique()
-            elif is_numeric_dtype(features[f]):
-                numerical.append(f)
+        categorical = {f: features[f].unique() for f in features
+                       if is_string_dtype(features[f])}
+        numerical = [f for f in features if is_numeric_dtype(features[f])]
     return render_template('process.html', file=session['file'],
                            categorical=categorical, numerical=numerical,
                            version=__version__)
@@ -63,10 +58,11 @@ def result():
         session.modified = True
         file = session['form'].pop('file', None)
         features, outcome = processing.get_xy(file)
+        categorical = {f: features[f].unique() for f in features
+                       if is_string_dtype(features[f])}
         category = ('').join(
             [v for k, v in session['form'].items() if k in categorical])
         cf = features[categorical].sum(axis=1)
-        n = cf.value_counts().get(category, 1) if category else len(features)
         if any([not value for value in session['form'].values()]):
             results = {'<font color="red">Error': 'Failed to collect data'}
         else:
@@ -74,7 +70,7 @@ def result():
             if category:
                 X = X.loc[(cf[cf == category]).index]
                 y = y.loc[(cf[cf == category]).index]
-            ols = processing.predict_ols(X, y, sample, n - 1)
+            ols = processing.predict_ols(X, y, sample, len(X) - 1)
             ols_url = 'https://en.wikipedia.org/wiki/Ordinary_least_squares'
             ci_url = 'https://en.wikipedia.org/wiki/Confidence_interval'
             r2_url = 'https://en.wikipedia.org/wiki/Coefficient_of_determination'
@@ -88,6 +84,6 @@ def result():
             }
             if not all(sample.squeeze(axis=0).between(X.min(), X.max())):
                 results['<font color="orange">Warning'] = 'Out-of-sample'
-    return render_template('result.html', form=session['form'],
+    return render_template('result.html', file=file, form=session['form'],
                            outcome=outcome.name, results=results,
                            version=__version__)
