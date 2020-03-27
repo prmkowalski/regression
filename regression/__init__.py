@@ -40,15 +40,16 @@ def index():
 @app.route('/process', methods=['GET', 'POST'])
 def process():
     if request.method == 'POST':
+        session['name'] = request.form['name']
         session['file'] = request.form['file']
         session.modified = True
         features = processing.get_xy(session['file'])[0]
         categorical = {f: features[f].unique() for f in features
                        if is_string_dtype(features[f])}
         numerical = [f for f in features if is_numeric_dtype(features[f])]
-    return render_template('process.html', file=session['file'],
-                           categorical=categorical, numerical=numerical,
-                           version=__version__)
+    return render_template('process.html', version=__version__,
+                           name=session['name'], file=session['file'],
+                           categorical=categorical, numerical=numerical)
 
 
 @app.route('/result', methods=['GET', 'POST'])
@@ -56,6 +57,7 @@ def result():
     if request.method == 'POST':
         session['form'] = dict(request.form.items())
         session.modified = True
+        name = session['form'].pop('name', None)
         file = session['form'].pop('file', None)
         features, outcome = processing.get_xy(file)
         categorical = {f: features[f].unique() for f in features
@@ -84,6 +86,6 @@ def result():
             }
             if not all(sample.squeeze(axis=0).between(X.min(), X.max())):
                 results['<font color="orange">Warning'] = 'Out-of-sample'
-    return render_template('result.html', file=file, form=session['form'],
-                           outcome=outcome.name, results=results,
-                           version=__version__)
+    return render_template('result.html', version=__version__,
+                           form=session['form'], name=name, file=file,
+                           outcome=outcome.name, results=results)
