@@ -8,6 +8,7 @@
 <body>
     <form method="post" action="/process">
         {% for name, path in files.items() %}
+            <input type="hidden" name="name" value="{{ name }}">
             <p><button name="file" value={{ path }}>{{ loop.index }} »</button>
             {{ name|safe }}</p>
         {% endfor %}

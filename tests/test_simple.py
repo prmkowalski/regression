@@ -40,7 +40,7 @@ def test_app():
             c.get('/'),
             c.post('/', content_type='multipart/form-data',
                    data=dict(file=(BytesIO(b'content'), 'upload.csv'))),
-            c.post('/process', data={'file': file}),
+            c.post('/process', data={'name': file, 'file': file}),
             c.post('/result', data={'file': file, 'X': '', 'category': ''}),
             c.post('/result', data={'file': file, 'X': '120', 'category': 'a'})
         ]
