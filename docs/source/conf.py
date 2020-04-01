@@ -14,15 +14,17 @@ import os
 import sys
 sys.path.insert(0, os.path.abspath('../..'))
 
-from regression import __version__, __author__
-
 # -- Project information -----------------------------------------------------
 
 project = 'regression'
-copyright = f'2020, {__author__}'
-author = __author__
+copyright = '2020, Paweł Kowalski'
+author = 'Paweł Kowalski'
 
 # The full version, including alpha/beta/rc tags
+from regression._version import get_versions
+__version__ = get_versions()['version']
+del get_versions
+
 release = __version__
 
 
