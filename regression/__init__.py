@@ -1,7 +1,4 @@
-"""Web app for regression analysis of provided data files."""
-
 __all__ = ['processing']
-__author__ = 'Paweł Kowalski'
 
 import os
 
