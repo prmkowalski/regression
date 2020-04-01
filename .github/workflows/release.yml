@@ -4,9 +4,6 @@ on:
   push:
     tags:
       - '*'
-    branches:
-      # temporarily for testing:
-      - move-to-github-actions
 
 jobs:
   deploy:
@@ -30,7 +27,7 @@ jobs:
       run: |
         pip install setuptools wheel twine
         python setup.py sdist bdist_wheel
-        # twine upload dist/*
+        twine upload dist/*
     - name: Built documentation with Sphinx
       run: |
         pip install sphinx numpydoc
