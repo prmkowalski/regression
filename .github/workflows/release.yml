@@ -22,21 +22,23 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install setuptools wheel twine numpydoc
         pip install flask openpyxl pandas statsmodels xlrd
     - name: Build and publish
       env:
         TWINE_USERNAME: ${{ secrets.PYPI_USERNAME }}
         TWINE_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
       run: |
+        pip install setuptools wheel twine
         python setup.py sdist bdist_wheel
         # twine upload dist/*
-    - uses: ammaraskar/sphinx-action@master
-      with:
-        docs-folder: "docs/"
+    - name: Built documentation
+      run: |
+        pip install sphinx numpydoc
+        cd docs
+        make html
     - name: Commit documentation changes
       run: |
-        git clone https://github.com/makr3la/regression.git --branch gh-pages --single-branch gh-pages
+        git clone https://${{ secrets.GITHUB_TOKEN }}@github.com/makr3la/regression.git --branch gh-pages --single-branch gh-pages
         cp -r docs/_build/html/* gh-pages/
         cd gh-pages
         git config --local user.email "action@github.com"
