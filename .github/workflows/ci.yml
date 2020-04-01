@@ -2,10 +2,7 @@ name: CI
 
 on:
   push:
-    branches:
-      - master
-      # temporarily for testing:
-      - move-to-github-actions
+    branches: [ master ]
   pull_request:
     branches: [ master ]
 
