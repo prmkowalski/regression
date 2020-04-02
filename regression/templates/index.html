@@ -7,9 +7,9 @@
 </head>
 <body>
     <form method="post" action="/process">
-        {% for name, path in files.items() %}
-            <p><button name="file" value={{ path }}>{{ loop.index }} »</button>
-            {{ name|safe }}</p>
+        {% for file in files.items() %}
+            <p><button name="file" value="{{ file }}">{{ loop.index }} »</button>
+            {{ file[0]|safe }}</p>
         {% endfor %}
     </form>
     <form method="post" enctype="multipart/form-data">

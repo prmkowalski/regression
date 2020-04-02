@@ -4,6 +4,7 @@ from ._version import get_versions
 __version__ = get_versions()['version']
 del get_versions
 
+from ast import literal_eval
 import os
 
 from flask import Flask, redirect, render_template, request, session
@@ -28,7 +29,7 @@ def index():
     if request.method == 'POST':
         file = request.files['file']
         if file and allowed_file(file.filename):
-            filename = secure_filename(file.filename).replace(' ', '_')
+            filename = secure_filename(file.filename)
             file.save(os.path.join(os.path.dirname(__file__), filename))
             return redirect(request.url)
     return render_template('index.html', version=__version__, files=files)
@@ -39,13 +40,14 @@ def process():
     if request.method == 'POST':
         session['file'] = request.form['file']
         session.modified = True
-        features = processing.get_xy(session['file'])[0]
+        name, path = literal_eval(session['file'])
+        features = processing.get_xy(path)[0]
         categorical = {f: features[f].unique() for f in features
                        if is_string_dtype(features[f])}
         numerical = [f for f in features if is_numeric_dtype(features[f])]
-    return render_template('process.html', file=session['file'],
-                           categorical=categorical, numerical=numerical,
-                           version=__version__)
+    return render_template('process.html', version=__version__,
+                           name=name, path=path,
+                           categorical=categorical, numerical=numerical)
 
 
 @app.route('/result', methods=['GET', 'POST'])
@@ -53,34 +55,28 @@ def result():
     if request.method == 'POST':
         session['form'] = dict(request.form.items())
         session.modified = True
-        file = session['form'].pop('file', None)
-        features, outcome = processing.get_xy(file)
+        name = session['form'].pop('name', None)
+        path = session['form'].pop('path', None)
+        features, outcome = processing.get_xy(path)
         categorical = {f: features[f].unique() for f in features
                        if is_string_dtype(features[f])}
         category = ('').join(
             [v for k, v in session['form'].items() if k in categorical])
         cf = features[categorical].sum(axis=1)
         if any([not value for value in session['form'].values()]):
-            results = {'<font color="red">Error': 'Failed to collect data'}
+            result = {'<font color="red">Error': 'Failed to collect data'}
         else:
-            X, y, sample = processing.process_data(file, session['form'])
+            X, y, sample = processing.process_data(path, session['form'])
             if category:
                 X = X.loc[(cf[cf == category]).index]
                 y = y.loc[(cf[cf == category]).index]
             ols = processing.predict_ols(X, y, sample, len(X) - 1)
-            ols_url = 'https://en.wikipedia.org/wiki/Ordinary_least_squares'
-            ci_url = 'https://en.wikipedia.org/wiki/Confidence_interval'
-            r2_url = 'https://en.wikipedia.org/wiki/Coefficient_of_determination'
-            results = {
-                f'<strong><a href={ols_url}>OLS</a> Prediction':
-                    f'{ols["mean"]:.5g}',
-                f'</strong>95% <a href={ci_url}>CI</a>':
-                    f'{ols["mean_ci_lower"]:.5g} ÷ {ols["mean_ci_upper"]:.5g}',
-                f'Adjusted <a href={r2_url}>R²</a>':
-                    f'{ols["rsquared_adj"]:.2f}'
+            result = {
+                f'<strong>{ols["mean"]:.5g}</strong>':
+                f'({ols["mean_ci_lower"]:.5g} ÷ {ols["mean_ci_upper"]:.5g})'
             }
             if not all(sample.squeeze(axis=0).between(X.min(), X.max())):
-                results['<font color="orange">Warning'] = 'Out-of-sample'
-    return render_template('result.html', file=file, form=session['form'],
-                           outcome=outcome.name, results=results,
-                           version=__version__)
+                result['<font color="orange">Warning'] = 'Out-of-sample'
+    return render_template('result.html', version=__version__,
+                           form=session['form'], name=name, path=path,
+                           outcome=outcome.name, result=result)

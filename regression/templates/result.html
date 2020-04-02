@@ -7,14 +7,15 @@
 </head>
 <body>
     <form method="post" action="/process" style='display: inline;'>
-        <input type="hidden" name="file" value={{ file }}>
+        <p>» {{ name|safe }}</p>
+        <input type="hidden" name="file" value="('{{ name }}', '{{ path }}')">
         {% for feature, value in form.items() %}
             {{ feature }} = {{ value }}<br>
         {% endfor %}
         <p>{{ outcome }} =<br>
         <ul style="list-style-type:none;">
-            {% for name, result in results.items() %}
-                <li>{{ name|safe }} » {{ result }}</li>
+            {% for key, value in result.items() %}
+                <li>{{ key|safe }} » {{ value }}</li>
             {% endfor %}
         </ul></p>
         <input type="submit" value="«">

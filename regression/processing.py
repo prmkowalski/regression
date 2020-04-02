@@ -42,8 +42,6 @@ def get_xy(filepath):
     except:
         df = pd.read_excel(filepath, index_col=0)
     df.index = df.index.fillna('Unlabeled')
-    df.columns = [label.replace(' ', '_') for label in df.columns]
-    df.replace(' ', '_', regex=True, inplace=True)
     X = df.iloc[:, :-1]
     y = df.iloc[:, -1]
     return X, y
@@ -107,8 +105,7 @@ def predict_ols(X, y, sample, dof):
     -------
     prediction_results : Series
         Contains prediction and prediction variance, confidence intervals
-        for the prediction of the mean and of new observations and adjusted
-        coefficient of determination.
+        for the prediction of the mean and of new observations.
 
     """
     model = sm.OLS(y, X)
@@ -116,5 +113,4 @@ def predict_ols(X, y, sample, dof):
     prediction = results.get_prediction(sample)
     prediction.dist_args = [dof]
     prediction_results = prediction.summary_frame().squeeze()
-    prediction_results['rsquared_adj'] = results.rsquared_adj
     return prediction_results
