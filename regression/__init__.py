@@ -28,8 +28,7 @@ def allowed_file(filename):
 @app.route('/', methods=['GET', 'POST'])
 def index():
     files = processing.find_files()
-    if 'URL' in app.config:
-        files.update(app.config['URL'])
+    if 'URL' in app.config: files.update(app.config['URL'])
     if request.method == 'POST':
         file = request.files['file']
         if file and allowed_file(file.filename):
