@@ -11,6 +11,12 @@ import pandas as pd
 import statsmodels.api as sm
 
 
+def _allowed_file(filename):
+    """Return True if file extension is allowed, False otherwise."""
+    extensions = ['csv', 'xls', 'xlsx']
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in extensions
+
+
 def find_files(where=None):
     """
     Return all supported files with paths.

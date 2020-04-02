@@ -4,7 +4,6 @@ import os
 import numpy as np
 import pandas as pd
 
-from regression import allowed_file
 from regression import app
 from regression import processing as lib
 
@@ -20,7 +19,7 @@ def test_lib():
     df.to_excel(os.path.join(os.path.dirname(__file__), 'test.xlsx'))
 
     files = lib.find_files(os.path.dirname(__file__))
-    assert [allowed_file(f) for f in files]
+    assert [lib._allowed_file(f) for f in files]
 
     element = np.random.randint(0, n)
     form = {'X': f'{X[element]}', 'category': f'{category[element]}'}
