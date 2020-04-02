@@ -3,8 +3,6 @@ from os import path
 from setuptools import setup, find_packages
 import versioneer
 
-from regression import __doc__, __author__
-
 here = path.abspath(path.dirname(__file__))
 
 with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
@@ -14,10 +12,10 @@ setup(
     name='regression',
     version=versioneer.get_version(),
     cmdclass=versioneer.get_cmdclass(),
-    description=__doc__,
+    description='Web app for regression analysis of provided data files.',
     long_description=long_description,
     url='https://github.com/makr3la/regression',
-    author=__author__,
+    author='Paweł Kowalski',
     author_email='makr3la@gmail.com',
     license='MIT',
     classifiers=[

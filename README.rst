@@ -17,8 +17,8 @@ regression
     :target: https://github.com/makr3la/regression/blob/master/LICENSE
     :alt: GitHub
 
-.. image:: https://travis-ci.org/makr3la/regression.svg?branch=master
-    :target: https://travis-ci.org/makr3la/regression
+.. image:: https://github.com/makr3la/regression/workflows/CI/badge.svg
+    :target: https://github.com/makr3la/regression/actions?query=workflow%3ACI
 
 .. image:: https://coveralls.io/repos/github/makr3la/regression/badge.svg
     :target: https://coveralls.io/github/makr3la/regression
