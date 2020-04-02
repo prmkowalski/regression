@@ -7,19 +7,19 @@
 </head>
 <body>
     <form method="post" action="/result">
-        <p>{{ name|safe }}</p>
+        <p>» {{ name|safe }}</p>
         <input type="hidden" name="name" value="{{ name }}">
-        <input type="hidden" name="file" value={{ file }}>
+        <input type="hidden" name="path" value="{{ path }}">
         {% for feature, values in categorical.items() %}
             <p>{{ feature }}<br>
             {% for value in values %}
-                <input type="radio" name={{ feature }} value={{ value }}>
+                <input type="radio" name="{{ feature }}" value="{{ value }}">
                 {{ value }}<br>
             {% endfor %}
         {% endfor %}
         {% for feature in numerical %}
             <p>{{ feature }}<br>
-            <input type="number" step="any" name={{ feature }}></p>
+            <input type="number" step="any" name="{{ feature }}"></p>
         {% endfor %}
         <input type="button" value="«" onclick="window.location='.';">
         <input type="submit" value="»">
