@@ -1,8 +1,5 @@
 __all__ = ['processing']
-
-from ._version import get_versions
-__version__ = get_versions()['version']
-del get_versions
+from ._version import version as __version__
 
 from flask import Flask
 app = Flask(__name__)

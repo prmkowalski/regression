@@ -1,9 +1,11 @@
 [tool]
+
 [tool.poetry]
 authors = ["Paweł Kowalski <makr3la@gmail.com>"]
 description = ""
 name = "regression"
 version = "0.0.0"
+
 [tool.poetry.dependencies]
 cx-freeze = "*"
 flask = "*"
@@ -14,3 +16,7 @@ python = "^3.7"
 statsmodels = "*"
 werkzeug = "^0.15"
 xlrd = "^1.1"
+
+[build-system]
+requires = ["setuptools>=40.8.0", "setuptools_scm", "wheel"]
+build-backend = "setuptools.build_meta"
