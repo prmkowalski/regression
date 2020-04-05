@@ -12,7 +12,7 @@ setup(
     name='regression',
     version=versioneer.get_version(),
     cmdclass=versioneer.get_cmdclass(),
-    description='Web app for regression analysis of provided data files.',
+    description='Web app for regression analysis of provided data files',
     long_description=long_description,
     url='https://github.com/makr3la/regression',
     author='Paweł Kowalski',
@@ -30,7 +30,8 @@ setup(
         'Programming Language :: Python :: 3.8',
         'Topic :: Scientific/Engineering',
     ],
-    packages=find_packages(exclude=['docs', 'tests']),
+    package_dir={'': 'src'},
+    packages=find_packages(where='src'),
     python_requires='>=3.6',
     install_requires=[
         'flask',
@@ -39,6 +40,14 @@ setup(
         'statsmodels',
         'xlrd>=1.1',
     ],
+    extras_require={
+        'test': ['pytest', 'pytest-cov'],
+    },
+    entry_points={
+        'console_scripts': [
+            'regression=regression.__main__:main',
+        ],
+    },
     include_package_data=True,
     zip_safe=False,
 )

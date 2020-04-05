@@ -1,7 +1,7 @@
 include README.rst
 include LICENSE
-recursive-include regression/static *
-recursive-include regression/templates *
+recursive-include src/regression/static *
+recursive-include src/regression/templates *
 include versioneer.py
-include regression/_version.py
-include regression/config.cfg
+include src/regression/_version.py
+include src/regression/config.cfg

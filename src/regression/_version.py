@@ -43,7 +43,7 @@ def get_config():
     cfg.style = "pep440"
     cfg.tag_prefix = ""
     cfg.parentdir_prefix = "regression-"
-    cfg.versionfile_source = "regression/_version.py"
+    cfg.versionfile_source = "src/regression/_version.py"
     cfg.verbose = False
     return cfg
 
