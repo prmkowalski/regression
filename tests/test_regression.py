@@ -1,5 +1,6 @@
 from io import BytesIO
 import os
+import subprocess
 
 import numpy as np
 import pandas as pd
@@ -33,7 +34,7 @@ def test_lib():
 
 def test_app():
     app.testing = True
-    file = os.path.join('tests', 'test.csv')
+    file = os.path.join(os.path.dirname(__file__), 'test.csv')
     with app.test_client() as c:
         responses = [
             c.get('/'),
@@ -45,4 +46,8 @@ def test_app():
             c.post('/result', data={'name': 'test', 'path': file,
                                     'X': '120', 'category': 'a'})
         ]
-        assert [r.status_code == 200 for r in responses]
+        assert all([r.status_code in [200, 302] for r in responses])
+
+
+def test_main():
+    subprocess.check_call(['regression'])

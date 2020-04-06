@@ -10,9 +10,6 @@
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #
-import os
-import sys
-sys.path.insert(0, os.path.abspath('../..'))
 
 # -- Project information -----------------------------------------------------
 
@@ -21,11 +18,8 @@ copyright = '2020, Paweł Kowalski'
 author = 'Paweł Kowalski'
 
 # The full version, including alpha/beta/rc tags
-from regression._version import get_versions
-__version__ = get_versions()['version']
-del get_versions
-
-release = __version__
+from pkg_resources import get_distribution
+release = get_distribution('regression').version
 
 
 # -- General configuration ---------------------------------------------------
