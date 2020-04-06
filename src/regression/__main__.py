@@ -6,13 +6,13 @@ from threading import Timer
 import webbrowser
 
 from . import __version__, app
-from . processing import find_files
+from .processing import find_files
 
 
 def main(args=None):
     if args is None:
         args = sys.argv[1:]
-        
+
     if len(args) < 1:
         print('usage: regression [run] [config] [path] [files] [version]')
 
@@ -31,4 +31,5 @@ def main(args=None):
             print(__version__)
 
 
-main()
+if __name__ == '__main__':
+    main()

@@ -1,5 +1,10 @@
 __all__ = ['processing']
-from ._version import version as __version__
+
+try:
+    from ._version import version as __version__
+except ModuleNotFoundError:
+    from setuptools_scm import get_version
+    __version__ = get_version()
 
 from flask import Flask
 app = Flask(__name__)
