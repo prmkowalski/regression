@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>regression.processing &#8212; regression 0.4.1 documentation</title>
+    <title>regression.processing &#8212; regression 0.4.3 documentation</title>
     <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     
@@ -31,7 +31,7 @@
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">regression 0.4.1 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">regression 0.4.3 documentation</a> &#187;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
@@ -64,9 +64,9 @@
   <div class="section" id="module-regression.processing">
 <span id="regression-processing"></span><h1>regression.processing<a class="headerlink" href="#module-regression.processing" title="Permalink to this headline">¶</a></h1>
 <p>Module with a library of data processing functions.</p>
-<dl class="function">
+<dl class="py function">
 <dt id="regression.processing.find_files">
-<code class="sig-prename descclassname">regression.processing.</code><code class="sig-name descname">find_files</code><span class="sig-paren">(</span><em class="sig-param">where=None</em><span class="sig-paren">)</span><a class="headerlink" href="#regression.processing.find_files" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">regression.processing.</code><code class="sig-name descname">find_files</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">where</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#regression.processing.find_files" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return all supported files with paths.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -78,15 +78,15 @@
 </dl>
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="regression.processing.get_xy">
-<code class="sig-prename descclassname">regression.processing.</code><code class="sig-name descname">get_xy</code><span class="sig-paren">(</span><em class="sig-param">filepath</em><span class="sig-paren">)</span><a class="headerlink" href="#regression.processing.get_xy" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">regression.processing.</code><code class="sig-name descname">get_xy</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filepath</span></em><span class="sig-paren">)</span><a class="headerlink" href="#regression.processing.get_xy" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return features and outcomes from the file.</p>
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="regression.processing.process_data">
-<code class="sig-prename descclassname">regression.processing.</code><code class="sig-name descname">process_data</code><span class="sig-paren">(</span><em class="sig-param">filepath</em>, <em class="sig-param">sample</em><span class="sig-paren">)</span><a class="headerlink" href="#regression.processing.process_data" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">regression.processing.</code><code class="sig-name descname">process_data</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filepath</span></em>, <em class="sig-param"><span class="n">sample</span></em><span class="sig-paren">)</span><a class="headerlink" href="#regression.processing.process_data" title="Permalink to this definition">¶</a></dt>
 <dd><p>Ingest and format data from the input for regression analysis.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -110,9 +110,9 @@
 </dl>
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="regression.processing.predict_ols">
-<code class="sig-prename descclassname">regression.processing.</code><code class="sig-name descname">predict_ols</code><span class="sig-paren">(</span><em class="sig-param">X</em>, <em class="sig-param">y</em>, <em class="sig-param">sample</em>, <em class="sig-param">dof</em><span class="sig-paren">)</span><a class="headerlink" href="#regression.processing.predict_ols" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">regression.processing.</code><code class="sig-name descname">predict_ols</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">X</span></em>, <em class="sig-param"><span class="n">y</span></em>, <em class="sig-param"><span class="n">sample</span></em>, <em class="sig-param"><span class="n">dof</span></em><span class="sig-paren">)</span><a class="headerlink" href="#regression.processing.predict_ols" title="Permalink to this definition">¶</a></dt>
 <dd><p>Run a simple ordinary least squares model for data from the input.</p>
 <p><a class="reference external" href="https://en.wikipedia.org/wiki/Ordinary_least_squares">https://en.wikipedia.org/wiki/Ordinary_least_squares</a></p>
 <dl class="field-list simple">
@@ -151,12 +151,12 @@ for the prediction of the mean and of new observations.</p>
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">regression 0.4.1 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">regression 0.4.3 documentation</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2020, Paweł Kowalski.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.4.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.0.0.
     </div>
   </body>
 </html>

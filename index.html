@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>regression &#8212; regression 0.4.1 documentation</title>
+    <title>regression &#8212; regression 0.4.3 documentation</title>
     <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     
@@ -31,7 +31,7 @@
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="#">regression 0.4.1 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="#">regression 0.4.3 documentation</a> &#187;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
@@ -80,10 +80,9 @@
 <a class="reference external image-reference" href="https://pypi.org/project/regression/"><img alt="PyPI - Status" src="https://img.shields.io/pypi/status/regression" /></a>
 <a class="reference external image-reference" href="https://github.com/makr3la/regression/blob/master/LICENSE"><img alt="GitHub" src="https://img.shields.io/github/license/makr3la/regression" /></a>
 <a class="reference external image-reference" href="https://github.com/makr3la/regression/actions?query=workflow%3ACI"><img alt="https://github.com/makr3la/regression/workflows/CI/badge.svg" src="https://github.com/makr3la/regression/workflows/CI/badge.svg" /></a>
-<a class="reference external image-reference" href="https://coveralls.io/github/makr3la/regression"><img alt="https://coveralls.io/repos/github/makr3la/regression/badge.svg" src="https://coveralls.io/repos/github/makr3la/regression/badge.svg" /></a>
 <p>Web app for
 <a class="reference external" href="https://en.wikipedia.org/wiki/Regression_analysis">regression analysis</a>
-of provided data files.</p>
+of provided data files</p>
 <p><a class="reference external" href="https://github.com/makr3la/regression/releases">Changelog »</a></p>
 <div class="section" id="installation">
 <h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
@@ -94,14 +93,14 @@ of provided data files.</p>
 </div>
 <div class="section" id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
-<p>To change configuration
+<p>To open <code class="docutils literal notranslate"><span class="pre">config.cfg</span></code> file and change configuration
 <a class="reference external" href="https://flask.palletsprojects.com/en/1.1.x/config/#builtin-configuration-values">values</a>
 run:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ python -m regression --config  <span class="c1"># Open config.cfg file</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ regression config
 </pre></div>
 </div>
 <p>Deploy web app to a WSGI server or run locally on Flask’s built-in server:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ python -m regression
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ regression run
 </pre></div>
 </div>
 <a class="reference external image-reference" href="https://repl.it/github/makr3la/regression"><img alt="https://repl.it/badge/github/makr3la/regression" src="https://repl.it/badge/github/makr3la/regression" /></a>
@@ -113,12 +112,13 @@ run:</p>
 </ol>
 <ul class="simple">
 <li><p>using <strong>upload form</strong>, which will save the file in the app root directory,</p></li>
-<li><p>by <strong>copying them</strong> into into the app subdirectory, for example <em>./data</em>,</p></li>
+<li><p>by <strong>copying them</strong> into into the app subdirectory
+(run <code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">regression</span> <span class="pre">path</span></code> to find the copy path),</p></li>
 <li><p>by <strong>adding links</strong> to files stored online as <cite>URL</cite> dict of config file:</p></li>
 </ul>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ python -m regression --config
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ regression config
 ...
-<span class="nv">URL</span> <span class="o">=</span> <span class="o">{</span><span class="s1">&#39;file_name&#39;</span>: <span class="s1">&#39;download_link&#39;</span><span class="o">}</span>  <span class="c1"># The file_name can be in HTML format</span>
+<span class="nv">URL</span> <span class="o">=</span> <span class="o">{</span><span class="s1">&#39;name&#39;</span>: <span class="s1">&#39;download_link&#39;</span><span class="o">}</span> <span class="c1"># &#39;name&#39; supports HTML format</span>
 </pre></div>
 </div>
 <ol class="arabic simple" start="2">
@@ -127,11 +127,11 @@ run:</p>
 <ul class="simple">
 <li><p>Delimited text files (CSV)</p></li>
 </ul>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>index,features,...,outcome  <span class="c1"># First row is a header containing a list of field names</span>
-item <span class="m">1</span>,X11,X12,...,X1p,y1   <span class="c1"># Value rows should follow this order</span>
-item <span class="m">2</span>,X21,X22,...,X2p,y2   <span class="c1"># Features can be given as numerical or categorical values</span>
-...
-item n,Xn1,Xn2,...,Xnp,yn
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>index,features,...,outcome  <span class="c1"># First row is a header</span>
+item <span class="m">1</span>,X11,X12,...,X1p,y1   <span class="c1"># Follow order: index, X, y</span>
+item <span class="m">2</span>,X21,X22,...,X2p,y2   <span class="c1"># Features can be given as</span>
+...                         <span class="c1"># numerical or categorical</span>
+item n,Xn1,Xn2,...,Xnp,yn   <span class="c1"># Use &#39;;&#39; when decimal sep is &#39;,&#39;</span>
 </pre></div>
 </div>
 <ul class="simple">
@@ -139,17 +139,15 @@ item n,Xn1,Xn2,...,Xnp,yn
 </ul>
 <table class="docutils align-default">
 <colgroup>
-<col style="width: 15%" />
+<col style="width: 18%" />
+<col style="width: 25%" />
+<col style="width: 11%" />
+<col style="width: 25%" />
 <col style="width: 20%" />
-<col style="width: 20%" />
-<col style="width: 9%" />
-<col style="width: 20%" />
-<col style="width: 16%" />
 </colgroup>
 <thead>
 <tr class="row-odd"><th class="head"><p>index</p></th>
 <th class="head"><p>feature 1</p></th>
-<th class="head"><p>feature 2</p></th>
 <th class="head"><p>…</p></th>
 <th class="head"><p>feature p</p></th>
 <th class="head"><p>outcome</p></th>
@@ -158,14 +156,12 @@ item n,Xn1,Xn2,...,Xnp,yn
 <tbody>
 <tr class="row-even"><td><p>item 1</p></td>
 <td><p>X11</p></td>
-<td><p>X12</p></td>
 <td><p>…</p></td>
 <td><p>X1p</p></td>
 <td><p>y1</p></td>
 </tr>
 <tr class="row-odd"><td><p>item 2</p></td>
 <td><p>X21</p></td>
-<td><p>X22</p></td>
 <td><p>…</p></td>
 <td><p>X2p</p></td>
 <td><p>y2</p></td>
@@ -175,11 +171,9 @@ item n,Xn1,Xn2,...,Xnp,yn
 <td><p>…</p></td>
 <td><p>…</p></td>
 <td><p>…</p></td>
-<td><p>…</p></td>
 </tr>
 <tr class="row-odd"><td><p>item n</p></td>
 <td><p>Xn1</p></td>
-<td><p>Xn2</p></td>
 <td><p>…</p></td>
 <td><p>Xnp</p></td>
 <td><p>yn</p></td>
@@ -217,12 +211,12 @@ discuss what you would like to change.</p>
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="#">regression 0.4.1 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="#">regression 0.4.3 documentation</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2020, Paweł Kowalski.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.4.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.0.0.
     </div>
   </body>
 </html>
