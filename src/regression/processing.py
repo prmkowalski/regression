@@ -102,8 +102,12 @@ def predict_ols(X, y, sample, dof):
 
     Parameters
     ----------
-    X, y, sample
-        Data prepared by ``process_data`` function.
+    X : DataFrame
+        Features prepared by :func:`process_data` function.
+    y : Series
+        Outcomes prepared by :func:`process_data` function.
+    sample : DataFrame
+        Data to predict prepared by :func:`process_data` function.
     dof : int
         The t-distribution degrees of freedom (observations - 1).
 

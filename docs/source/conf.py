@@ -19,7 +19,8 @@ author = 'Paweł Kowalski'
 
 # The full version, including alpha/beta/rc tags
 from pkg_resources import get_distribution
-release = get_distribution('regression').version
+version = get_distribution('regression').version
+release = version
 
 
 # -- General configuration ---------------------------------------------------
@@ -29,7 +30,8 @@ release = get_distribution('regression').version
 # ones.
 extensions = [
     'sphinx.ext.autodoc',
-    'numpydoc',
+    'sphinx.ext.napoleon',
+    'sphinx_rtd_theme',
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -46,7 +48,7 @@ exclude_patterns = []
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-html_theme = 'bizstyle'
+html_theme = 'sphinx_rtd_theme'
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
