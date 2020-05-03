@@ -3,7 +3,7 @@
 **/*.xlsx
 .pylint.d/
 poetry.lock
-/src/regression/_version.py
+src/regression/_version.py
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

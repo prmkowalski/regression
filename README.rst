@@ -18,7 +18,8 @@ regression
     :alt: GitHub
 
 .. image:: https://github.com/makr3la/regression/workflows/CI/badge.svg
-    :target: https://github.com/makr3la/regression/actions?query=workflow%3ACI
+    :target: https://github.com/makr3la/regression/actions?query=workflow%3ACI+branch%3Amaster
+    :alt: CI - Status
 
 Web app for
 `regression analysis <https://en.wikipedia.org/wiki/Regression_analysis>`_
