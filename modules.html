@@ -1,15 +1,18 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>regression.processing &mdash; regression 0.4.4 documentation</title>
+  <title>regression.processing &mdash; regression 0.5.0 documentation</title>
   
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
 
   
   
@@ -17,22 +20,19 @@
   
 
   
-  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
-        <script src="_static/language_data.js"></script>
     
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
     
-
-  
-  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" /> 
 </head>
@@ -48,7 +48,7 @@
           
 
           
-            <a href="index.html" class="icon icon-home"> regression
+            <a href="index.html" class="icon icon-home" alt="Documentation Home"> regression
           
 
           
@@ -58,7 +58,7 @@
             
             
               <div class="version">
-                0.4.4
+                0.5.0
               </div>
             
           
@@ -75,6 +75,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -90,6 +91,7 @@
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -128,7 +130,7 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="index.html">Docs</a> &raquo;</li>
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
         
       <li>regression.processing</li>
     
@@ -170,28 +172,6 @@
 </dd></dl>
 
 <dl class="py function">
-<dt id="regression.processing.process_data">
-<code class="sig-prename descclassname">regression.processing.</code><code class="sig-name descname">process_data</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filepath</span></em>, <em class="sig-param"><span class="n">sample</span></em><span class="sig-paren">)</span><a class="headerlink" href="#regression.processing.process_data" title="Permalink to this definition">¶</a></dt>
-<dd><p>Ingest and format data from the input for regression analysis.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>filepath</strong> (<em>str</em>) – Path to the file.</p></li>
-<li><p><strong>sample</strong> (<em>dict of {str: str}</em>) – The {feature: value} pairs for which we want to predict.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p><ul class="simple">
-<li><p><strong>X</strong> (<em>DataFrame</em>) – Formatted features with categorical variables converted into dummy.</p></li>
-<li><p><strong>y</strong> (<em>Series</em>) – Outcomes - target values.</p></li>
-<li><p><strong>sample</strong> (<em>DataFrame</em>) – Data to predict with columns matched to the formatted features (X).</p></li>
-</ul>
-</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
 <dt id="regression.processing.predict_ols">
 <code class="sig-prename descclassname">regression.processing.</code><code class="sig-name descname">predict_ols</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">X</span></em>, <em class="sig-param"><span class="n">y</span></em>, <em class="sig-param"><span class="n">sample</span></em>, <em class="sig-param"><span class="n">dof</span></em><span class="sig-paren">)</span><a class="headerlink" href="#regression.processing.predict_ols" title="Permalink to this definition">¶</a></dt>
 <dd><p>Run a simple ordinary least squares model for data from the input.</p>
@@ -215,6 +195,28 @@ for the prediction of the mean and of new observations.</p>
 </dl>
 </dd></dl>
 
+<dl class="py function">
+<dt id="regression.processing.process_data">
+<code class="sig-prename descclassname">regression.processing.</code><code class="sig-name descname">process_data</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filepath</span></em>, <em class="sig-param"><span class="n">sample</span></em><span class="sig-paren">)</span><a class="headerlink" href="#regression.processing.process_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ingest and format data from the input for regression analysis.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filepath</strong> (<em>str</em>) – Path to the file.</p></li>
+<li><p><strong>sample</strong> (<em>dict of {str: str}</em>) – The {feature: value} pairs for which we want to predict.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>X</strong> (<em>DataFrame</em>) – Formatted features with categorical variables converted into dummy.</p></li>
+<li><p><strong>y</strong> (<em>Series</em>) – Outcomes - target values.</p></li>
+<li><p><strong>sample</strong> (<em>DataFrame</em>) – Data to predict with columns matched to the formatted features (X).</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
 </div>
 
 
@@ -228,11 +230,19 @@ for the prediction of the mean and of new observations.</p>
 
   <div role="contentinfo">
     <p>
+        
         &copy; Copyright 2020, Paweł Kowalski
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -243,7 +253,6 @@ for the prediction of the mean and of new observations.</p>
 
   </div>
   
-
 
   <script type="text/javascript">
       jQuery(function () {
