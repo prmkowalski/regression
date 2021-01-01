@@ -25,6 +25,8 @@ Web app for
 `regression analysis <https://en.wikipedia.org/wiki/Regression_analysis>`_
 of provided data files
 
+    **NOTE**: This project is no longer developed nor maintained.
+
 `Changelog » <https://github.com/makr3la/regression/releases>`_
 
 Installation
@@ -99,9 +101,3 @@ Files
 +--------+-----------+-----+-----------+---------+
 | item n |    Xn1    | ... |    Xnp    |    yn   |
 +--------+-----------+-----+-----------+---------+
-
-Contributing
-------------
-
-Pull requests are welcome. For major changes, please open an issue first to
-discuss what you would like to change.
